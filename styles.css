@@ -1272,6 +1272,27 @@ body {
         position: relative;
     }
     
+    /* Mobile carousel images - use sl1-sl5 on mobile */
+    .carousel-slide[data-mobile-image="sl1.jpg"] {
+        background-image: url('sl1.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl2.jpg"] {
+        background-image: url('sl2.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl3.jpg"] {
+        background-image: url('sl3.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl4.jpg"] {
+        background-image: url('sl4.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl5.jpg"] {
+        background-image: url('sl5.jpg') !important;
+    }
+    
     .carousel-container {
         width: 100%;
         max-width: 100%;
