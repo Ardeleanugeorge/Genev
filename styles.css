@@ -818,7 +818,7 @@ body {
     font-size: 48px;
     font-weight: 300;
     letter-spacing: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .store-title {
@@ -834,6 +834,10 @@ body {
     max-width: 900px;
     margin: 0 auto 20px;
     color: var(--text-light);
+}
+
+.store-section .store-description:first-of-type {
+    margin-top: 0;
 }
 
 /* Celebrities Section */
