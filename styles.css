@@ -1378,6 +1378,63 @@ body {
         max-width: 100%;
     }
     
+    /* NEW section - 2 products per row on mobile */
+    #new .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    #new .product-image-wrapper {
+        height: 400px;
+    }
+    
+    #new .product-image-main,
+    #new .product-image-hover {
+        height: 400px;
+    }
+    
+    #new .product-card h3 {
+        font-size: 12px;
+        margin: 10px 0 5px;
+        padding: 0 10px;
+    }
+    
+    #new .product-card .price {
+        font-size: 14px;
+        padding: 0 10px 10px;
+    }
+    
+    /* Cocktail section - 1 product per row (stays as is) */
+    #cocktail .products-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    /* Bridal section - 2 products per row on mobile */
+    #bridal .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    #bridal .product-image-wrapper {
+        height: 400px;
+    }
+    
+    #bridal .product-card img {
+        height: 400px;
+    }
+    
+    #bridal .product-card h3 {
+        font-size: 12px;
+        margin: 10px 0 5px;
+        padding: 0 10px;
+    }
+    
+    #bridal .product-card .price {
+        font-size: 14px;
+        padding: 0 10px 10px;
+    }
+    
     .product-image-wrapper {
         height: 500px;
     }
