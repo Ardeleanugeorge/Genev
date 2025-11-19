@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genev - Modă Couture | Eleganță Atemporală</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-banner">
+            <p>BLACK WEEK | -20% REDUCERE cu codul BLACK • 14 Noiembrie – 21 Noiembrie • Online & Showroom</p>
+        </div>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="logo.png" alt="GENEV" class="logo-img">
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="#new">Nou</a></li>
+                    <li><a href="#cocktail">Cocktail</a></li>
+                    <li><a href="#evening">Seară</a></li>
+                    <li><a href="#couture">Couture</a></li>
+                    <li><a href="#bridal">Nuntă</a></li>
+                    <li><a href="#sets">SETURI 2 PIESE</a></li>
+                    <li><a href="#suits">Costume</a></li>
+                    <li><a href="#coats">Paltoane</a></li>
+                    <li><a href="#sale">Reduceri</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="#search" class="icon-link" title="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </a>
+                    <a href="#account" class="icon-link" title="Account">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <a href="#cart" class="icon-link" title="Cart">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Carousel Slider -->
+    <section class="hero-carousel">
+        <div class="carousel-container">
+            <div class="carousel-slides">
+                <div class="carousel-slide active" style="background-image: url('1.jpg');">
+                    <div class="hero-content">
+                        <h2 class="hero-subtitle">OMNIA 1.0</h2>
+                        <h1 class="hero-title">INTO THE DARK. THE MASTERY BEGINS</h1>
+                        <a href="#shop" class="btn-primary">SHOP NOW</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('2.jpg');">
+                    <div class="hero-content">
+                        <h2 class="hero-subtitle">EVENING COLLECTION</h2>
+                        <h1 class="hero-title">EVERY SHADOW YIELDS TO LIGHT</h1>
+                        <a href="#evening" class="btn-primary">VIEW ALL</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('3.jpg');">
+                    <div class="hero-content">
+                        <h2 class="hero-subtitle">COCKTAIL COLLECTION</h2>
+                        <h1 class="hero-title">ETERNAL. BOLD. LUMINOUS</h1>
+                        <a href="#cocktail" class="btn-primary">SHOP NOW</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('4.jpg');">
+                    <div class="hero-content">
+                        <h2 class="hero-subtitle">COUTURE COLLECTION</h2>
+                        <h1 class="hero-title">FLUID AS SILK, TIMELESS AS STONE</h1>
+                        <a href="#couture" class="btn-primary">DISCOVER</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('5.jpg');">
+                    <div class="hero-content">
+                        <h2 class="hero-subtitle">SUITS COLLECTIONS</h2>
+                        <h1 class="hero-title">POWER TAKES SHAPE IN SILENCE</h1>
+                        <a href="#suits" class="btn-primary">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn carousel-prev" aria-label="Previous slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <button class="carousel-btn carousel-next" aria-label="Next slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+            <div class="carousel-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+                <span class="dot" data-slide="4"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Products Section -->
+    <section id="new" class="products-section">
+        <div class="container">
+            <h2 class="section-title">NEW</h2>
+            <p class="section-subtitle">EVERYTHING ETERNAL, EVERYTHING BOLD</p>
+            <div class="products-grid">
+                <div class="product-card">
+                    <a href="product-ca168.html" class="product-link">
+                        <div class="product-image-wrapper">
+                            <img src="1-Cristallini13.08.202515803-shop_600x.webp" alt="Rochie de seara lunga" class="product-image-main">
+                            <img src="red2.jpg" alt="Rochie de seara lunga - spate" class="product-image-hover">
+                        </div>
+                    </a>
+                    <h3>Rochie de seara lunga confectionata din lycra metalic Angelina CA168</h3>
+                    <p class="price">4.089,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="1-Cristallini13.08.202517751-shop_600x.webp" alt="Capa din lycra metalic">
+                    <h3>Capa din lycra metalic, cu design fluid si efect spectaculos Noa CA174</h3>
+                    <p class="price">1.589,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="1-Cristallini13.08.202517332-shop_600x.webp" alt="Rochie midi">
+                    <h3>Rochie midi din lycra metalic Ornella CA179</h3>
+                    <p class="price">3.459,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="1-Cristallini13.08.202517413-shop_600x.webp" alt="Rochie de seara">
+                    <h3>Rochie de seara din lycra metalic cu maneci lungi Liora CA165</h3>
+                    <p class="price">3.899,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="1-Cristallini13.08.202516579-shop_600x.webp" alt="Rochie eleganta">
+                    <h3>Rochie eleganta din lycra metalic cu design sofisticat</h3>
+                    <p class="price">3.299,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="1-HSI03230-red-e_600x.webp" alt="Rochie roșie">
+                    <h3>Rochie de seara din satin roșu cu design clasic</h3>
+                    <p class="price">2.899,00 lei</p>
+                </div>
+            </div>
+            <a href="#all-products" class="btn-secondary">Vezi toate produsele</a>
+        </div>
+    </section>
+
+    <!-- București Store -->
+    <section class="store-section">
+        <div class="container">
+            <h2 class="brand-title">MAGAZIN – BUCUREȘTI</h2>
+            <p class="store-description">
+                <strong>GENEV</strong> te întâmpină în showroom-ul nostru din București, locul în care eleganța prinde formă printr-o selecție atentă de rochii și piese premium alese personal din Italia.
+            </p>
+            <p class="store-description">
+                Aici, într-un spațiu modern și intim, clientele pot descoperi direct calitatea materialelor, croiul impecabil și atenția la detalii care definesc fiecare produs <strong>GENEV</strong>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Cocktail Collection Products -->
+    <section id="cocktail" class="products-section" style="background: #f8f8f8;">
+        <div class="container">
+            <h2 class="section-title">COCKTAIL COLLECTION</h2>
+            <p class="section-subtitle">ETERNAL. BOLD. LUMINOUS</p>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="HSI01775_1_600x.webp" alt="Rochie cocktail">
+                    <h3>Rochie de cocktail din satin cu detalii elegante</h3>
+                    <p class="price">2.459,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="HSI06620e_600x.webp" alt="Rochie cocktail">
+                    <h3>Rochie midi de cocktail cu design modern</h3>
+                    <p class="price">2.789,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="CA56_2_600x.webp" alt="Rochie cocktail">
+                    <h3>Rochie de cocktail din crepe cu volane CA56</h3>
+                    <p class="price">2.199,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="CA75_2_600x.webp" alt="Rochie cocktail">
+                    <h3>Rochie de cocktail din satin cu broderie CA75</h3>
+                    <p class="price">3.599,00 lei</p>
+                </div>
+            </div>
+            <a href="#all-cocktail" class="btn-secondary">Vezi toate produsele</a>
+        </div>
+    </section>
+
+    <!-- Designer's Choice -->
+    <section class="designer-choice">
+        <div class="container">
+            <h2 class="section-title">SELECTED BY GENEV ❤️</h2>
+            <div class="featured-product">
+                <div class="product-image">
+                    <img src="1-Cristallini13.08.202517751-shop_600x.webp" alt="Capa Noa CA174">
+                </div>
+                <div class="product-details">
+                    <h1>Capa din lycra metalic, cu design fluid si efect spectaculos Noa CA174</h1>
+                    <p class="price-large">1.589,00 lei</p>
+                    
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label>Color:</label>
+                            <div class="color-options">
+                                <span class="color-option active" data-color="Silver">Silver</span>
+                                <span class="color-option" data-color="Bronz">Bronz</span>
+                                <span class="color-option" data-color="Gold">Gold</span>
+                                <span class="color-option" data-color="Cupru">Cupru</span>
+                                <span class="color-option" data-color="Verde metalic">Verde metalic</span>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <label>Size: <a href="#size-chart">Size chart</a></label>
+                            <div class="size-options">
+                                <span class="size-option">XS</span>
+                                <span class="size-option">S</span>
+                                <span class="size-option">M</span>
+                                <span class="size-option">L</span>
+                                <span class="size-option">XL</span>
+                                <span class="size-option">XXL</span>
+                                <span class="size-option">XXXL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="size-chart-section" id="size-chart">
+                        <h3>Tabel Marimi</h3>
+                        <img src="model-tabel-marimi_1_480x480.jpg" alt="Tabel marimi">
+                        <table class="size-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>XS</th>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                    <th>2XL</th>
+                                    <th>3XL</th>
+                                    <th>4XL</th>
+                                    <th>5XL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bust</td>
+                                    <td>80 cm</td>
+                                    <td>84 cm</td>
+                                    <td>88 cm</td>
+                                    <td>92 cm</td>
+                                    <td>96 cm</td>
+                                    <td>100 cm</td>
+                                    <td>104 cm</td>
+                                    <td>110 cm</td>
+                                    <td>116 cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Talie</td>
+                                    <td>62 cm</td>
+                                    <td>66 cm</td>
+                                    <td>70 cm</td>
+                                    <td>74 cm</td>
+                                    <td>78 cm</td>
+                                    <td>82 cm</td>
+                                    <td>86 cm</td>
+                                    <td>92 cm</td>
+                                    <td>98 cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Solduri</td>
+                                    <td>86 cm</td>
+                                    <td>90 cm</td>
+                                    <td>94 cm</td>
+                                    <td>98 cm</td>
+                                    <td>102 cm</td>
+                                    <td>106 cm</td>
+                                    <td>110 cm</td>
+                                    <td>116 cm</td>
+                                    <td>122 cm</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="measurement-guide">
+                            <h4>Model</h4>
+                            <div class="guide-item">
+                                <h5>1. Bust:</h5>
+                                <ul>
+                                    <li>Aceasta nu este marimea sutienului</li>
+                                    <li>Nu purtati sutien cand va masurati</li>
+                                    <li>Relaxati-va mainile pe langa corp</li>
+                                    <li>Se masoara sub brat, in jurul partii celei mai proeminente cu un centimetru flexibil</li>
+                                </ul>
+                            </div>
+                            <div class="guide-item">
+                                <h5>2. Talie:</h5>
+                                <ul>
+                                    <li>Identificati talia</li>
+                                    <li>Se masoara deasupra buricului, unde circumferinta este cea mai mica</li>
+                                    <li>Tineti centrimetrul mai lejer pentru a lasa loc de respiratie</li>
+                                </ul>
+                            </div>
+                            <div class="guide-item">
+                                <h5>3. Solduri:</h5>
+                                <ul>
+                                    <li>Se masoara la punctul cel mai proeminent al feselor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-add-cart">Add to cart</button>
+                    <a href="#product-details" class="btn-link">View product details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Selection -->
+    <section class="philosophy-section">
+        <div class="container">
+            <h2 class="section-title">FIECARE PRODUS ESTE ALES PERSONAL</h2>
+            <h3 class="section-subtitle" style="margin-bottom: 20px;">GEORGIANA NEGURESCU VOINESCU – FONDATOR</h3>
+            <p class="philosophy-text">
+                Fondatoarea <strong>GENEV</strong>, Georgiana Negurescu Voinescu, călătorește regulat în Italia, unde colaborează cu ateliere și furnizori cunoscuți pentru tradiție și execuție premium.
+            </p>
+            <p class="philosophy-text">
+                Fiecare rochie, fiecare produs este selectat individual: testat, analizat, verificat în ceea ce privește calitatea materialului, croiul, confortul și estetică.
+            </p>
+            <p class="philosophy-text">
+                Totul pentru ca în magazin să ajungă doar acele piese care pot oferi o experiență reală de eleganță.
+            </p>
+        </div>
+    </section>
+
+    <!-- Personal Experience -->
+    <section class="fashion-section">
+        <div class="container">
+            <h2 class="section-title">GENEV — O EXPERIENȚĂ PERSONALĂ</h2>
+            <p class="fashion-text">
+                În showroom, clientele sunt întâmpinate cu consiliere dedicată și recomandări personalizate. <strong>GENEV</strong> nu este un magazin obișnuit — este un spațiu unde fiecare femeie este ajutată să-și descopere rochia perfectă, în ritmul ei, într-un mediu calm și elegant.
+            </p>
+        </div>
+    </section>
+
+    <!-- Love for Details -->
+    <section class="philosophy-section" style="background: var(--secondary-color);">
+        <div class="container">
+            <h2 class="section-title">IUBIREA PENTRU DETALII ȘI CALITATE</h2>
+            <p class="philosophy-text">
+                Esența <strong>GENEV</strong> stă în atenția pentru detalii și selecția materialelor premium.
+            </p>
+            <p class="philosophy-text">
+                Texturi fine, lycra metalic, stofe de calitate superioară, linii curate și finisaje impecabile — fiecare piesă reflectă o estetică modernă și feminină.
+            </p>
+        </div>
+    </section>
+
+    <!-- Italian Ateliers -->
+    <section class="fashion-section" style="background: #f8f8f8;">
+        <div class="container">
+            <h2 class="section-title">FASHION ATELIERS OF ITALY</h2>
+            <h3 class="section-subtitle" style="margin-bottom: 30px;">COLECȚII SELECTATE CU GRIJĂ</h3>
+            <p class="fashion-text">
+                Colecțiile <strong>GENEV</strong> sunt rezultatul colaborării cu ateliere italiene recunoscute pentru măiestria lor.
+            </p>
+            <p class="fashion-text">
+                Produsele sunt alese direct de la sursă, pentru a oferi o selecție premium, bine curată și potrivită gustului clientelor din România.
+            </p>
+        </div>
+    </section>
+
+    <!-- Statement Style -->
+    <section class="statement-section">
+        <div class="container">
+            <h2 class="section-title">STATEMENT STYLE BY GENEV</h2>
+            <p class="statement-text">
+                La <strong>GENEV</strong>, credem că rochia perfectă este aceea care face o femeie să se simtă:
+            </p>
+            <p class="statement-text" style="font-size: 22px; margin-top: 20px;">
+                frumoasă, puternică, elegantă și încrezătoare.
+            </p>
+            <p class="statement-text" style="margin-top: 30px;">
+                Aici găsești piese create pentru evenimente, seri speciale, ocazii memorabile — rochii care pun în valoare silueta și personalitatea fiecărei femei.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contemporary Elegance -->
+    <section class="store-section" style="background: var(--secondary-color);">
+        <div class="container">
+            <h2 class="brand-title">GENEV – ELEGANȚĂ CONTEMPORANĂ</h2>
+            <div class="locations" style="margin-top: 40px;">
+                <span>București</span>
+                <span>Italia</span>
+                <span>Eleganță modernă</span>
+                <span>Selecție premium</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evening Collection Products -->
+    <section id="evening" class="products-section">
+        <div class="container">
+            <h2 class="section-title">EVENING COLLECTION</h2>
+            <p class="section-subtitle">EVERY SHADOW YIELDS TO LIGHT</p>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="CA63_CA80_3_1237af7a-3342-4b39-ae77-d4be636b8770_600x.webp" alt="Rochie de seara">
+                    <h3>Rochie de seara lunga din satin cu detalii sofisticate</h3>
+                    <p class="price">4.599,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="1-Cristallini13.08.202517751-shop_600x (1).webp" alt="Rochie de seara">
+                    <h3>Rochie de seara din lycra metalic cu design fluid</h3>
+                    <p class="price">3.789,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="CA63_CA80_1_600x (1).webp" alt="Rochie de seara">
+                    <h3>Rochie de seara din satin cu broderie manuala</h3>
+                    <p class="price">5.299,00 lei</p>
+                </div>
+            </div>
+            <a href="#all-evening" class="btn-secondary">Vezi toate produsele</a>
+        </div>
+    </section>
+
+    <!-- Bridal Collection -->
+    <section id="bridal" class="products-section" style="background: #f8f8f8;">
+        <div class="container">
+            <h2 class="section-title">BRIDAL</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="CA975_2_600x.webp" alt="Rochie lunga din tul">
+                    <h3>Rochie lunga din tul cu broderie manuala cu elemente Swarovski CA975</h3>
+                    <p class="price">6.389,00 lei</p>
+                </div>
+                <div class="product-card">
+                    <img src="CA67_9_3a7a8802-b2e8-4058-bc82-48014757041e_600x.webp" alt="Cordon din crepe">
+                    <div class="sale-badge">On sale</div>
+                    <h3>Cordon din crepe si pietre Preciosa CA67C</h3>
+                    <p class="price">
+                        <span class="sale-price">1.301,00 lei</span>
+                        <span class="original-price">-30% 1.859,00 lei</span>
+                    </p>
+                </div>
+                <div class="product-card">
+                    <img src="SKA582_3_27da899c-0646-4837-8e92-08d675b0be3c_600x.webp" alt="Rochie de seara">
+                    <h3>Rochie de seara lunga din fronseuri din matase si slit frontal CA582</h3>
+                </div>
+                <div class="product-card">
+                    <img src="CA63_CA80_1_600x.webp" alt="Rochie de cocktail">
+                    <h3>Rochie de cocktail din satin si broderie Iris CA63</h3>
+                    <p class="price">6.389,00 lei</p>
+                </div>
+            </div>
+            <a href="#all-bridal" class="btn-secondary">Vezi toate produsele</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">DESPRE GENEV</h2>
+            <div class="about-content">
+                <p>
+                    <strong>GENEV</strong> este un brand românesc dedicat eleganței moderne, creat pentru femeile care își doresc ținute rafinate, bine lucrate și potrivite pentru cele mai importante momente din viața lor.
+                </p>
+                <p>
+                    Fondat de <strong>Georgiana Negurescu Voinescu</strong>, brandul s-a născut din pasiunea ei pentru modă, calitate și selecția atentă a pieselor care pun în valoare feminitatea. Cu o viziune clară și un simț estetic format în ani de experiență, Georgiana călătorește constant în Italia, unde colaborează cu ateliere recunoscute pentru tradiția și măiestria lor. Acolo alege personal materiale, modele și colecții care reflectă standardele ei de calitate, pentru a aduce în magazinul <strong>GENEV</strong> doar produse impecabile, create să reziste în timp.
+                </p>
+                <p>
+                    Magazinul fizic și sediul <strong>GENEV</strong> se află în București, unde clientele pot experimenta direct calitatea materialelor, croiul și linia fiecărei piese. Fiecare produs este selectat astfel încât să ofere un mix perfect între eleganță, confort și atitudine — de la rochii de seară spectaculoase, la piese minimaliste, lejere, dar sofisticate.
+                </p>
+                <p>
+                    La <strong>GENEV</strong>, fiecare colecție este construită în jurul ideii că eleganța nu este un trend, ci o formă de identitate. Țesăturile premium, finisajele atent realizate și selecția riguroasă de produse conturează un brand ce pune în centrul său respectul pentru clientă, pentru corp și pentru frumusețea autentică.
+                </p>
+                <p>
+                    Astăzi, <strong>GENEV</strong> evoluează constant, construit cu răbdare, integritate și atenție la detalii. Calitatea produselor și implicarea fondatoarei se regăsesc în fiecare piesă, iar vizitele în magazin devin momente în care fiecare clientă primește ghidare reală, consiliere personală și o experiență autentică dedicată nevoilor ei.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Informatii</h3>
+                    <ul>
+                        <li><a href="#faq">Intrebari frecvente</a></li>
+                        <li><a href="#livrare">Livrare</a></li>
+                        <li><a href="#cum-cumpar">Cum cumpar?</a></li>
+                        <li><a href="#cum-platesc">Cum platesc?</a></li>
+                        <li><a href="#retururi">Retururi</a></li>
+                        <li><a href="#jobs">Jobs</a></li>
+                        <li><a href="#termeni">Termeni si conditii</a></li>
+                        <li><a href="#anpc">ANPC</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#programeaza">Programeaza</a></li>
+                        <li><a href="#card-fidelitate">Card de fidelitate</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Abonați-vă pentru a primi actualizări, acces la oferte exclusive și multe altele.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Adresa ta de email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; GENEV.ro</p>
+                <div class="payment-methods">
+                    <span>American Express</span>
+                    <span>Apple Pay</span>
+                    <span>Google Pay</span>
+                    <span>Maestro</span>
+                    <span>Mastercard</span>
+                    <span>Shop Pay</span>
+                    <span>Union Pay</span>
+                    <span>Visa</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

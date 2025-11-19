@@ -1,0 +1,135 @@
+/* Product Page Styles */
+.product-page {
+    padding: 120px 0 80px;
+    min-height: 100vh;
+}
+
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.product-gallery {
+    position: sticky;
+    top: 120px;
+    order: 1;
+}
+
+.product-info {
+    order: 2;
+}
+
+.product-main-image {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.product-main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.product-thumbnails {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    overflow: hidden;
+}
+
+.thumbnail:hover {
+    border-color: var(--border-color);
+}
+
+.thumbnail.active {
+    border-color: var(--primary-color);
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info h1 {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    letter-spacing: 1px;
+}
+
+.product-price {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    color: var(--text-dark);
+}
+
+.product-description {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-color);
+}
+
+.product-description h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.product-description p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.product-description ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.product-description li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-light);
+}
+
+.product-description li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 20px;
+}
+
+.logo a {
+    text-decoration: none;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .product-detail {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .product-gallery {
+        position: static;
+    }
+}
+
