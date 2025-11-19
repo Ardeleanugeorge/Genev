@@ -1272,27 +1272,6 @@ body {
         position: relative;
     }
     
-    /* Mobile carousel images */
-    .carousel-slide[data-mobile-image="sl1.jpg"] {
-        background-image: url('sl1.jpg') !important;
-    }
-    
-    .carousel-slide[data-mobile-image="sl2.jpg"] {
-        background-image: url('sl2.jpg') !important;
-    }
-    
-    .carousel-slide[data-mobile-image="sl3.jpg"] {
-        background-image: url('sl3.jpg') !important;
-    }
-    
-    .carousel-slide[data-mobile-image="sl4.jpg"] {
-        background-image: url('sl4.jpg') !important;
-    }
-    
-    .carousel-slide[data-mobile-image="sl5.jpg"] {
-        background-image: url('sl5.jpg') !important;
-    }
-    
     .carousel-container {
         width: 100%;
         max-width: 100%;
@@ -1414,10 +1393,13 @@ body {
     
     #new .product-card {
         width: 100%;
+        display: flex;
+        flex-direction: column;
     }
     
     #new .product-image-wrapper {
         height: 350px;
+        width: 100%;
     }
     
     #new .product-image-main,
@@ -1425,16 +1407,27 @@ body {
         height: 350px;
     }
     
+    /* Imagini simple fără wrapper */
+    #new .product-card img:not(.product-image-main):not(.product-image-hover) {
+        height: 350px;
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+    }
+    
     #new .product-card h3 {
         font-size: 11px;
         margin: 8px 0 4px;
         padding: 0 8px;
         line-height: 1.3;
+        flex-grow: 1;
     }
     
     #new .product-card .price {
         font-size: 13px;
         padding: 0 8px 8px;
+        margin-top: auto;
     }
     
     /* Cocktail section - 1 product per row (stays as is) */
