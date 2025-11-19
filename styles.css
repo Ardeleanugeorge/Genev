@@ -282,6 +282,7 @@ body {
     justify-content: center;
 }
 
+
 .carousel-slide::before {
     content: '';
     position: absolute;
@@ -1253,7 +1254,8 @@ body {
     }
     
     .header--scrolled .logo {
-        top: 10px;
+        top: 50%;
+        transform: translate(-50%, calc(-50% + 5px));
     }
     
     .header--scrolled .logo-img {
@@ -1268,6 +1270,27 @@ body {
         max-width: 100vw;
         overflow: hidden;
         position: relative;
+    }
+    
+    /* Mobile carousel images */
+    .carousel-slide[data-mobile-image="sl1.jpg"] {
+        background-image: url('sl1.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl2.jpg"] {
+        background-image: url('sl2.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl3.jpg"] {
+        background-image: url('sl3.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl4.jpg"] {
+        background-image: url('sl4.jpg') !important;
+    }
+    
+    .carousel-slide[data-mobile-image="sl5.jpg"] {
+        background-image: url('sl5.jpg') !important;
     }
     
     .carousel-container {
@@ -1379,29 +1402,39 @@ body {
     }
     
     /* NEW section - 2 products per row on mobile */
+    #new .container {
+        padding: 0 15px;
+    }
+    
     #new .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 12px;
+        width: 100%;
+    }
+    
+    #new .product-card {
+        width: 100%;
     }
     
     #new .product-image-wrapper {
-        height: 400px;
+        height: 350px;
     }
     
     #new .product-image-main,
     #new .product-image-hover {
-        height: 400px;
+        height: 350px;
     }
     
     #new .product-card h3 {
-        font-size: 12px;
-        margin: 10px 0 5px;
-        padding: 0 10px;
+        font-size: 11px;
+        margin: 8px 0 4px;
+        padding: 0 8px;
+        line-height: 1.3;
     }
     
     #new .product-card .price {
-        font-size: 14px;
-        padding: 0 10px 10px;
+        font-size: 13px;
+        padding: 0 8px 8px;
     }
     
     /* Cocktail section - 1 product per row (stays as is) */
@@ -1411,28 +1444,38 @@ body {
     }
     
     /* Bridal section - 2 products per row on mobile */
+    #bridal .container {
+        padding: 0 15px;
+    }
+    
     #bridal .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 12px;
+        width: 100%;
+    }
+    
+    #bridal .product-card {
+        width: 100%;
     }
     
     #bridal .product-image-wrapper {
-        height: 400px;
+        height: 350px;
     }
     
     #bridal .product-card img {
-        height: 400px;
+        height: 350px;
     }
     
     #bridal .product-card h3 {
-        font-size: 12px;
-        margin: 10px 0 5px;
-        padding: 0 10px;
+        font-size: 11px;
+        margin: 8px 0 4px;
+        padding: 0 8px;
+        line-height: 1.3;
     }
     
     #bridal .product-card .price {
-        font-size: 14px;
-        padding: 0 10px 10px;
+        font-size: 13px;
+        padding: 0 8px 8px;
     }
     
     .product-image-wrapper {
