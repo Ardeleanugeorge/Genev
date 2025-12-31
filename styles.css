@@ -158,7 +158,7 @@ body {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 28px;
+    gap: 35px;
     flex-wrap: nowrap;
     justify-content: flex-start;
     margin: 0;
@@ -166,7 +166,11 @@ body {
     align-items: center;
 }
 
-.nav-menu a {
+.nav-item-dropdown {
+    position: relative;
+}
+
+.nav-link-main {
     text-decoration: none;
     color: var(--text-dark);
     font-size: 11px;
@@ -177,9 +181,12 @@ body {
     position: relative;
     padding: 5px 0;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-.nav-menu a::after {
+.nav-link-main::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -190,8 +197,53 @@ body {
     transition: width 0.3s ease;
 }
 
-.nav-menu a:hover::after {
+.nav-item-dropdown:hover .nav-link-main::after {
     width: 100%;
+}
+
+/* Dropdown Menu */
+.nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--secondary-color);
+    min-width: 200px;
+    padding: 15px 0;
+    margin-top: 10px;
+    list-style: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.nav-item-dropdown:hover .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--text-dark);
+    font-size: 12px;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    transition: background 0.2s ease;
+    font-weight: 300;
+}
+
+.nav-dropdown a:hover {
+    background: var(--hover-gray);
 }
 
 .nav-menu a:hover {
@@ -204,7 +256,7 @@ body {
 
 .nav-icons-header {
     display: flex;
-    gap: 22px;
+    gap: 25px;
     align-items: center;
     justify-content: flex-end;
     grid-column: 3;
@@ -218,6 +270,17 @@ body {
     justify-content: center;
     transition: all 0.25s ease;
     position: relative;
+}
+
+.icon-text {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.icon-count {
+    font-weight: 300;
 }
 
 .icon-link:hover {
@@ -1254,7 +1317,7 @@ body {
         width: 100%;
     }
     
-    .nav-menu-left .nav-menu a {
+    .nav-menu-left .nav-menu .nav-link-main {
         color: var(--secondary-color);
         text-shadow: none;
         font-size: 16px;
@@ -1263,8 +1326,37 @@ body {
         transition: color 0.3s;
     }
     
-    .nav-menu-left .nav-menu a:hover {
+    .nav-menu-left .nav-menu .nav-link-main:hover {
         color: var(--accent-color);
+    }
+    
+    .nav-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+    }
+    
+    .nav-dropdown a {
+        padding: 10px 20px;
+        color: var(--secondary-color);
+        font-size: 14px;
+    }
+    
+    .nav-dropdown a:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-icons-header {
+        gap: 15px;
+    }
+    
+    .icon-text {
+        font-size: 12px;
     }
     
     /* Overlay pentru meniu mobil */
