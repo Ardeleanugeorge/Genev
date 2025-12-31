@@ -460,11 +460,13 @@ body {
     overflow: hidden;
     position: relative;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .products-carousel-track {
     display: flex;
     transition: transform 0.5s ease;
+    width: 100%;
 }
 
 .products-carousel-group {
@@ -476,6 +478,15 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease, visibility 0.5s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 1025px) {
+    .products-carousel-group {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px !important;
+    }
 }
 
 .products-carousel-group.active {
