@@ -234,10 +234,55 @@ function initCarousel() {
     }
 }
 
+// Products Carousel
+let currentProductSlide = 0;
+const totalProductSlides = 4;
+
+function initProductsCarousel() {
+    const productSlides = document.querySelectorAll('.products-carousel-slide');
+    const prevBtn = document.querySelector('.products-carousel-prev');
+    const nextBtn = document.querySelector('.products-carousel-next');
+    const currentSlideSpan = document.querySelector('.current-slide');
+    
+    if (productSlides.length === 0) return;
+    
+    function showProductSlide(index) {
+        productSlides.forEach(slide => slide.classList.remove('active'));
+        if (productSlides[index]) {
+            productSlides[index].classList.add('active');
+        }
+        if (currentSlideSpan) {
+            currentSlideSpan.textContent = index + 1;
+        }
+    }
+    
+    function nextProductSlide() {
+        currentProductSlide = (currentProductSlide + 1) % totalProductSlides;
+        showProductSlide(currentProductSlide);
+    }
+    
+    function prevProductSlide() {
+        currentProductSlide = (currentProductSlide - 1 + totalProductSlides) % totalProductSlides;
+        showProductSlide(currentProductSlide);
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextProductSlide);
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevProductSlide);
+    }
+    
+    // Initialize first slide
+    showProductSlide(0);
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('GENEV website loaded successfully');
     initCarousel();
+    initProductsCarousel();
     
     // Test scroll functionality
     console.log('Scroll functionality initialized');
