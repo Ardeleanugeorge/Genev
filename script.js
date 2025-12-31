@@ -236,18 +236,37 @@ function initCarousel() {
 
 // Products Carousel - 4 products per group
 let currentProductGroup = 0;
-const totalProductGroups = 2; // 2 groups of 4 products
+let totalProductGroups = 0;
+let isMobile = window.innerWidth <= 768;
 
 function initProductsCarousel() {
     const productGroups = document.querySelectorAll('.products-carousel-group');
     const nextBtn = document.querySelector('.products-carousel-next-btn');
+    const carouselWrapper = document.querySelector('.products-carousel-wrapper');
+    const carouselTrack = document.querySelector('.products-carousel-track');
     
     if (productGroups.length === 0) return;
     
+    totalProductGroups = productGroups.length;
+    isMobile = window.innerWidth <= 768;
+    
     function showProductGroup(index) {
-        productGroups.forEach(group => group.classList.remove('active'));
-        if (productGroups[index]) {
-            productGroups[index].classList.add('active');
+        if (isMobile) {
+            // On mobile, use scroll
+            if (carouselWrapper && productGroups[index]) {
+                const group = productGroups[index];
+                const scrollLeft = group.offsetLeft - carouselWrapper.offsetLeft;
+                carouselWrapper.scrollTo({
+                    left: scrollLeft,
+                    behavior: 'smooth'
+                });
+            }
+        } else {
+            // On desktop, use opacity/visibility
+            productGroups.forEach(group => group.classList.remove('active'));
+            if (productGroups[index]) {
+                productGroups[index].classList.add('active');
+            }
         }
         
         // Hide next button if we're on the last group
@@ -268,11 +287,83 @@ function initProductsCarousel() {
     }
     
     if (nextBtn) {
-        nextBtn.addEventListener('click', nextProductGroup);
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            nextProductGroup();
+        });
+    }
+    
+    // Touch/swipe support for mobile
+    if (isMobile && carouselWrapper) {
+        let startX = 0;
+        let scrollLeft = 0;
+        let isDown = false;
+        
+        carouselWrapper.addEventListener('touchstart', (e) => {
+            isDown = true;
+            startX = e.touches[0].pageX - carouselWrapper.offsetLeft;
+            scrollLeft = carouselWrapper.scrollLeft;
+        });
+        
+        carouselWrapper.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.touches[0].pageX - carouselWrapper.offsetLeft;
+            const walk = (x - startX) * 2;
+            carouselWrapper.scrollLeft = scrollLeft - walk;
+        });
+        
+        carouselWrapper.addEventListener('touchend', () => {
+            isDown = false;
+            // Snap to nearest product
+            const scrollPosition = carouselWrapper.scrollLeft;
+            const cardWidth = carouselWrapper.querySelector('.product-card')?.offsetWidth || 0;
+            const gap = 12;
+            const snapPosition = Math.round(scrollPosition / (cardWidth + gap)) * (cardWidth + gap);
+            carouselWrapper.scrollTo({
+                left: snapPosition,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mouse drag support (for testing on desktop with mobile view)
+        carouselWrapper.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - carouselWrapper.offsetLeft;
+            scrollLeft = carouselWrapper.scrollLeft;
+            carouselWrapper.style.cursor = 'grabbing';
+        });
+        
+        carouselWrapper.addEventListener('mouseleave', () => {
+            isDown = false;
+            carouselWrapper.style.cursor = 'grab';
+        });
+        
+        carouselWrapper.addEventListener('mouseup', () => {
+            isDown = false;
+            carouselWrapper.style.cursor = 'grab';
+        });
+        
+        carouselWrapper.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carouselWrapper.offsetLeft;
+            const walk = (x - startX) * 2;
+            carouselWrapper.scrollLeft = scrollLeft - walk;
+        });
     }
     
     // Initialize first group
     showProductGroup(0);
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const wasMobile = isMobile;
+        isMobile = window.innerWidth <= 768;
+        if (wasMobile !== isMobile) {
+            showProductGroup(currentProductGroup);
+        }
+    });
 }
 
 // Initialize
