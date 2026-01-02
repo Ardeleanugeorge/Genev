@@ -306,12 +306,28 @@ function initProductsCarousel() {
         }
     }
     
+    function scrollToDesktopPage(pageIndex) {
+        if (!carouselTrack || isMobile) return;
+        
+        const allCards = carouselTrack.querySelectorAll('.product-card');
+        if (allCards.length === 0) return;
+        
+        const productsPerPage = 4;
+        const cardWidth = allCards[0].offsetWidth;
+        const gap = 20;
+        const pageWidth = (cardWidth + gap) * productsPerPage;
+        const translateX = -pageIndex * pageWidth;
+        
+        carouselTrack.style.transform = `translateX(${translateX}px)`;
+    }
+    
     function nextPage() {
         if (isMobile) {
             currentMobilePage = (currentMobilePage + 1) % totalMobilePages;
             scrollToMobilePage(currentMobilePage);
         } else {
             currentDesktopPage = (currentDesktopPage + 1) % totalDesktopPages;
+            scrollToDesktopPage(currentDesktopPage);
         }
         updatePagination();
     }
@@ -322,6 +338,7 @@ function initProductsCarousel() {
             scrollToMobilePage(currentMobilePage);
         } else {
             currentDesktopPage = (currentDesktopPage - 1 + totalDesktopPages) % totalDesktopPages;
+            scrollToDesktopPage(currentDesktopPage);
         }
         updatePagination();
     }
@@ -370,6 +387,9 @@ function initProductsCarousel() {
     
     // Initialize
     updatePagination();
+    if (!isMobile) {
+        scrollToDesktopPage(0);
+    }
     
     // Handle window resize
     window.addEventListener('resize', () => {
@@ -390,6 +410,7 @@ function initProductsCarousel() {
                 totalDesktopPages = Math.ceil(totalProducts / productsPerPage);
                 if (totalDesktopPages === 0) totalDesktopPages = 1;
                 currentDesktopPage = 0;
+                scrollToDesktopPage(0);
             }
             updatePagination();
         }

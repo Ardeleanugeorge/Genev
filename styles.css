@@ -490,16 +490,23 @@ body {
 }
 
 .products-carousel-track {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    width: 100%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 769px) {
     .products-carousel-track {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    
+    .products-carousel-track .product-card {
+        flex: 0 0 calc(25% - 15px);
+        width: calc(25% - 15px);
+        min-width: calc(25% - 15px);
+        max-width: calc(25% - 15px);
+        box-sizing: border-box;
     }
 }
 
