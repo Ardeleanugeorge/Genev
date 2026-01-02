@@ -251,10 +251,13 @@ function initProductsCarousel() {
     isMobile = window.innerWidth <= 768;
     
     function showProductGroup(index) {
+        // Normalize index for infinite loop
+        const normalizedIndex = index % totalProductGroups;
+        
         if (isMobile) {
             // On mobile, use scroll
-            if (carouselWrapper && productGroups[index]) {
-                const group = productGroups[index];
+            if (carouselWrapper && productGroups[normalizedIndex]) {
+                const group = productGroups[normalizedIndex];
                 const scrollLeft = group.offsetLeft - carouselWrapper.offsetLeft;
                 carouselWrapper.scrollTo({
                     left: scrollLeft,
@@ -264,26 +267,21 @@ function initProductsCarousel() {
         } else {
             // On desktop, use opacity/visibility
             productGroups.forEach(group => group.classList.remove('active'));
-            if (productGroups[index]) {
-                productGroups[index].classList.add('active');
+            if (productGroups[normalizedIndex]) {
+                productGroups[normalizedIndex].classList.add('active');
             }
         }
         
-        // Hide next button if we're on the last group
+        // Never hide next button - infinite loop
         if (nextBtn) {
-            if (index >= totalProductGroups - 1) {
-                nextBtn.classList.add('hidden');
-            } else {
-                nextBtn.classList.remove('hidden');
-            }
+            nextBtn.classList.remove('hidden');
         }
     }
     
     function nextProductGroup() {
-        if (currentProductGroup < totalProductGroups - 1) {
-            currentProductGroup++;
-            showProductGroup(currentProductGroup);
-        }
+        // Infinite loop - always go to next, wrap around to 0
+        currentProductGroup = (currentProductGroup + 1) % totalProductGroups;
+        showProductGroup(currentProductGroup);
     }
     
     if (nextBtn) {
@@ -293,11 +291,47 @@ function initProductsCarousel() {
         });
     }
     
-    // Touch/swipe support for mobile
+    // Touch/swipe support for mobile with infinite scroll
     if (isMobile && carouselWrapper) {
         let startX = 0;
         let scrollLeft = 0;
         let isDown = false;
+        
+        // Clone first and last groups for infinite scroll
+        const firstGroup = productGroups[0];
+        const lastGroup = productGroups[productGroups.length - 1];
+        if (firstGroup && lastGroup && carouselTrack) {
+            const firstClone = firstGroup.cloneNode(true);
+            firstClone.classList.add('clone', 'clone-first');
+            const lastClone = lastGroup.cloneNode(true);
+            lastClone.classList.add('clone', 'clone-last');
+            
+            carouselTrack.insertBefore(lastClone, firstGroup);
+            carouselTrack.appendChild(firstClone);
+            
+            // Scroll to first real group
+            setTimeout(() => {
+                carouselWrapper.scrollLeft = lastClone.offsetWidth;
+            }, 100);
+        }
+        
+        // Handle infinite scroll
+        carouselWrapper.addEventListener('scroll', () => {
+            if (!isDown) {
+                const scrollPos = carouselWrapper.scrollLeft;
+                const wrapperWidth = carouselWrapper.offsetWidth;
+                const trackWidth = carouselTrack.offsetWidth;
+                
+                // If scrolled to clone at the end, jump to real start
+                if (scrollPos >= trackWidth - wrapperWidth - 50) {
+                    carouselWrapper.scrollLeft = wrapperWidth;
+                }
+                // If scrolled to clone at the start, jump to real end
+                else if (scrollPos <= 50) {
+                    carouselWrapper.scrollLeft = trackWidth - wrapperWidth * 2;
+                }
+            }
+        });
         
         carouselWrapper.addEventListener('touchstart', (e) => {
             isDown = true;
