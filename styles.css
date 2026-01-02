@@ -1937,9 +1937,13 @@ body {
     }
     
     .hamburger {
-        display: flex;
+        display: flex !important;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
         z-index: 1001;
         position: relative;
+        padding: 5px;
         order: 1;
     }
     
@@ -1948,13 +1952,27 @@ body {
     }
     
     .hamburger span {
-        background: var(--text-dark);
+        background: var(--text-dark) !important;
         width: 22px;
         height: 2px;
+        display: block;
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
     }
     
     .header--scrolled .hamburger span {
-        background: var(--text-dark);
+        background: var(--text-dark) !important;
     }
     
     .nav-icons-header {
