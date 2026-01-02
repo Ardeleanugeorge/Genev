@@ -1,76 +1,90 @@
-// Mobile Menu Toggle - Works on both click and touch
-function initMobileMenu() {
-    function setupMenu() {
-        const hamburger = document.querySelector('.hamburger');
+// Mobile Menu Toggle - Direct and simple
+(function() {
+    'use strict';
+    
+    function toggleMobileMenu() {
         const navMenuLeft = document.querySelector('.nav-menu-left');
         const navOverlay = document.querySelector('.nav-overlay');
+        const hamburger = document.querySelector('.hamburger');
         
-        if (!hamburger || !navMenuLeft || !navOverlay) {
-            console.warn('Menu elements not found, retrying...');
-            setTimeout(setupMenu, 100);
+        if (!navMenuLeft || !navOverlay || !hamburger) {
             return;
         }
         
-        console.log('Mobile menu initialized');
+        const isActive = navMenuLeft.classList.contains('active');
         
-        function toggleMenu() {
-            const isActive = navMenuLeft.classList.contains('active');
-            
-            if (isActive) {
-                navMenuLeft.classList.remove('active');
-                navOverlay.classList.remove('active');
-                hamburger.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                navMenuLeft.classList.add('active');
-                navOverlay.classList.add('active');
-                hamburger.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-        
-        function closeMenu() {
+        if (isActive) {
             navMenuLeft.classList.remove('active');
             navOverlay.classList.remove('active');
             hamburger.classList.remove('active');
             document.body.style.overflow = '';
+        } else {
+            navMenuLeft.classList.add('active');
+            navOverlay.classList.add('active');
+            hamburger.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    function closeMobileMenu() {
+        const navMenuLeft = document.querySelector('.nav-menu-left');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const hamburger = document.querySelector('.hamburger');
+        
+        if (navMenuLeft) navMenuLeft.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    function initMobileMenu() {
+        const hamburger = document.getElementById('hamburgerBtn') || document.querySelector('.hamburger');
+        const navMenuLeft = document.querySelector('.nav-menu-left');
+        const navOverlay = document.querySelector('.nav-overlay');
+        
+        if (!hamburger || !navMenuLeft || !navOverlay) {
+            console.warn('Menu elements not found');
+            return;
         }
         
-        // Click event (desktop and mobile)
-        hamburger.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
-        });
-        
-        // Touch events for mobile (more reliable)
+        // Multiple event types for maximum compatibility
+        hamburger.onclick = toggleMobileMenu;
+        hamburger.addEventListener('click', toggleMobileMenu);
         hamburger.addEventListener('touchend', function(e) {
             e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
+            toggleMobileMenu();
         }, { passive: false });
         
-        // Close menu when clicking on overlay
-        navOverlay.addEventListener('click', closeMenu);
-        navOverlay.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            closeMenu();
-        }, { passive: false });
+        // Close on overlay
+        if (navOverlay) {
+            navOverlay.onclick = closeMobileMenu;
+            navOverlay.addEventListener('click', closeMobileMenu);
+            navOverlay.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                closeMobileMenu();
+            }, { passive: false });
+        }
         
-        // Close menu when clicking on a link
+        // Close on link click
         const navLinks = navMenuLeft.querySelectorAll('.nav-menu a');
         navLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
+            link.addEventListener('click', closeMobileMenu);
             link.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                closeMenu();
-            }, { passive: false });
+                closeMobileMenu();
+            }, { passive: true });
         });
     }
     
-    // Try to setup immediately, then retry if needed
-    setupMenu();
-}
+    // Initialize immediately and on DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+    } else {
+        initMobileMenu();
+    }
+    
+    // Also expose globally as fallback
+    window.toggleMobileMenu = toggleMobileMenu;
+})();
 
 // Color Selection
 const colorOptions = document.querySelectorAll('.color-option');
@@ -571,7 +585,6 @@ function initSearch() {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('GENEV website loaded successfully');
-    initMobileMenu();
     initCarousel();
     initProductsCarousel();
     initSearch();
