@@ -272,6 +272,11 @@ body {
     justify-content: center;
     transition: all 0.25s ease;
     position: relative;
+    gap: 5px;
+}
+
+.icon-link svg {
+    display: none;
 }
 
 .icon-text {
@@ -293,9 +298,15 @@ body {
     color: var(--accent-color);
 }
 
-.icon-link svg {
-    width: 20px;
-    height: 20px;
+/* Pe desktop, afișează textul, pe mobile doar iconițele */
+@media (min-width: 769px) {
+    .icon-link svg {
+        display: none;
+    }
+    
+    .icon-link .icon-text {
+        display: block;
+    }
 }
 
 .hamburger {
@@ -1710,6 +1721,9 @@ body {
         top: auto;
         transform: none;
         padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     /* Pe mobile, afișează logo-ul negru (cel de pe web) */
@@ -1772,10 +1786,35 @@ body {
         grid-column: 3;
     }
     
-    /* Pe mobile, afișează doar wishlist și cart */
+    /* Pe mobile, afișează doar cart (ca Rouje) */
     .nav-icons-header .desktop-search-icon,
-    .nav-icons-header .icon-link[href="#account"] {
+    .nav-icons-header .icon-link[href="#account"],
+    .nav-icons-header .icon-link[href="#wishlist"] {
         display: none;
+    }
+    
+    /* Pe mobile, ascunde textul pentru cart, păstrează doar iconița */
+    .nav-icons-header .icon-link[href="#cart"] .icon-text {
+        display: none;
+    }
+    
+    /* Pe mobile, afișează doar iconița SVG pentru cart */
+    .nav-icons-header .icon-link[href="#cart"] svg {
+        display: block;
+        width: 20px;
+        height: 20px;
+    }
+    
+    /* Pe mobile, ascunde textul pentru search din stânga */
+    .nav-left-mobile .icon-link .icon-text {
+        display: none;
+    }
+    
+    /* Pe mobile, afișează doar iconița SVG pentru search */
+    .nav-left-mobile .icon-link svg {
+        display: block;
+        width: 20px;
+        height: 20px;
     }
     
     .nav-icons-header .icon-link {
