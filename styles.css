@@ -47,7 +47,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 10000;
     background: transparent;
     box-shadow: none;
     transition: all 0.3s ease;
@@ -103,7 +103,7 @@ body {
     padding: 0;
     margin: 0;
     position: relative;
-    z-index: 1000;
+    z-index: 10001;
     background: transparent;
     transition: all 0.25s ease;
 }
@@ -345,6 +345,14 @@ body {
     z-index: 1;
     margin-top: 0;
     padding-top: 0;
+}
+
+/* Ensure carousel stays below header */
+.hero-carousel,
+.carousel-container,
+.carousel-slides,
+.carousel-slide {
+    z-index: 1 !important;
 }
 
 .carousel-container {
@@ -1944,7 +1952,7 @@ body {
         flex-direction: column;
         cursor: pointer;
         gap: 5px;
-        z-index: 10001 !important;
+        z-index: 10004 !important;
         position: relative;
         padding: 8px;
         background: transparent;
@@ -2039,7 +2047,7 @@ body {
         max-width: 350px;
         height: 100vh;
         background: #ffffff;
-        z-index: 10000;
+        z-index: 10003 !important;
         transition: left 0.3s ease;
         padding: 80px 30px 30px;
         margin-top: 0;
@@ -2124,7 +2132,7 @@ body {
         width: 100%;
         height: 100vh;
         background: rgba(0, 0, 0, 0.5);
-        z-index: 9999;
+        z-index: 10002 !important;
         backdrop-filter: blur(2px);
     }
     
