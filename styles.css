@@ -1746,10 +1746,12 @@ body {
     
     /* Mobile Left: Only Hamburger */
     .nav-left-mobile {
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: flex-start;
         grid-column: 1;
+        z-index: 10002;
+        position: relative;
     }
     
     .desktop-search-icon {
