@@ -244,11 +244,25 @@ function initProductsCarousel() {
     const nextBtn = document.querySelector('.products-carousel-next-btn');
     const carouselWrapper = document.querySelector('.products-carousel-wrapper');
     const carouselTrack = document.querySelector('.products-carousel-track');
+    const paginationPrev = document.querySelector('.carousel-pagination-prev');
+    const paginationNext = document.querySelector('.carousel-pagination-next');
+    const currentPageSpan = document.querySelector('.current-page');
+    const totalPagesSpan = document.querySelector('.total-pages');
     
     if (productGroups.length === 0) return;
     
     totalProductGroups = productGroups.length;
     isMobile = window.innerWidth <= 768;
+    
+    // Update pagination counter
+    function updatePagination() {
+        if (currentPageSpan) {
+            currentPageSpan.textContent = currentProductGroup + 1;
+        }
+        if (totalPagesSpan) {
+            totalPagesSpan.textContent = totalProductGroups;
+        }
+    }
     
     function showProductGroup(index) {
         // Normalize index for infinite loop
@@ -272,6 +286,9 @@ function initProductsCarousel() {
             }
         }
         
+        // Update pagination
+        updatePagination();
+        
         // Never hide next button - infinite loop
         if (nextBtn) {
             nextBtn.classList.remove('hidden');
@@ -284,10 +301,30 @@ function initProductsCarousel() {
         showProductGroup(currentProductGroup);
     }
     
+    function prevProductGroup() {
+        // Infinite loop - go to previous, wrap around to last
+        currentProductGroup = (currentProductGroup - 1 + totalProductGroups) % totalProductGroups;
+        showProductGroup(currentProductGroup);
+    }
+    
     if (nextBtn) {
         nextBtn.addEventListener('click', (e) => {
             e.preventDefault();
             nextProductGroup();
+        });
+    }
+    
+    if (paginationNext) {
+        paginationNext.addEventListener('click', (e) => {
+            e.preventDefault();
+            nextProductGroup();
+        });
+    }
+    
+    if (paginationPrev) {
+        paginationPrev.addEventListener('click', (e) => {
+            e.preventDefault();
+            prevProductGroup();
         });
     }
     
@@ -400,11 +437,124 @@ function initProductsCarousel() {
     });
 }
 
+// Search Functionality
+function initSearch() {
+    const searchTrigger = document.querySelector('.search-trigger');
+    const searchModal = document.getElementById('searchModal');
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const searchClose = document.querySelector('.search-modal-close');
+    const searchOverlay = document.querySelector('.search-modal-overlay');
+    
+    if (!searchTrigger || !searchModal || !searchInput || !searchResults) return;
+    
+    // Collect all products from the page
+    function getAllProducts() {
+        const products = [];
+        const productCards = document.querySelectorAll('.product-card');
+        
+        productCards.forEach(card => {
+            const title = card.querySelector('h3')?.textContent?.trim() || '';
+            const price = card.querySelector('.price')?.textContent?.trim() || '';
+            const link = card.querySelector('a')?.href || card.closest('a')?.href || '#';
+            const image = card.querySelector('img')?.src || '';
+            const alt = card.querySelector('img')?.alt || title;
+            
+            if (title) {
+                products.push({
+                    title: title,
+                    price: price,
+                    link: link,
+                    image: image,
+                    alt: alt
+                });
+            }
+        });
+        
+        return products;
+    }
+    
+    // Search products
+    function searchProducts(query) {
+        const products = getAllProducts();
+        const searchTerm = query.toLowerCase().trim();
+        
+        if (!searchTerm) {
+            searchResults.innerHTML = '<p class="search-placeholder">Start typing to search for products...</p>';
+            return;
+        }
+        
+        const filtered = products.filter(product => 
+            product.title.toLowerCase().includes(searchTerm) ||
+            product.alt.toLowerCase().includes(searchTerm)
+        );
+        
+        if (filtered.length === 0) {
+            searchResults.innerHTML = '<p class="search-no-results">No products found. Try a different search term.</p>';
+            return;
+        }
+        
+        // Display results
+        const resultsHTML = `
+            <div class="search-results-grid">
+                ${filtered.map(product => `
+                    <a href="${product.link}" class="search-result-item">
+                        <img src="${product.image}" alt="${product.alt}">
+                        <h4>${product.title}</h4>
+                        <span class="price">${product.price}</span>
+                    </a>
+                `).join('')}
+            </div>
+        `;
+        
+        searchResults.innerHTML = resultsHTML;
+    }
+    
+    // Open search modal
+    function openSearch() {
+        searchModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            searchInput.focus();
+        }, 100);
+    }
+    
+    // Close search modal
+    function closeSearch() {
+        searchModal.classList.remove('active');
+        document.body.style.overflow = '';
+        searchInput.value = '';
+        searchResults.innerHTML = '<p class="search-placeholder">Start typing to search for products...</p>';
+    }
+    
+    // Event listeners
+    searchTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        openSearch();
+    });
+    
+    searchClose?.addEventListener('click', closeSearch);
+    searchOverlay?.addEventListener('click', closeSearch);
+    
+    // Search on input
+    searchInput.addEventListener('input', (e) => {
+        searchProducts(e.target.value);
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+            closeSearch();
+        }
+    });
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('GENEV website loaded successfully');
     initCarousel();
     initProductsCarousel();
+    initSearch();
     
     // Test scroll functionality
     console.log('Scroll functionality initialized');
