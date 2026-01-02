@@ -515,7 +515,7 @@ body {
 /* Mobile: Show 2 products with swipe */
 @media (max-width: 768px) {
     .products-carousel-container {
-        padding: 0 20px;
+        padding: 0;
     }
     
     .products-carousel-wrapper {
@@ -527,6 +527,7 @@ body {
         -ms-overflow-style: none;
         cursor: grab;
         scroll-behavior: smooth;
+        padding: 0 20px;
     }
     
     .products-carousel-wrapper::-webkit-scrollbar {
@@ -545,10 +546,10 @@ body {
     }
     
     .products-carousel-group .product-card {
-        flex: 0 0 calc(50vw - 26px);
-        width: calc(50vw - 26px);
-        min-width: calc(50vw - 26px);
-        max-width: calc(50vw - 26px);
+        flex: 0 0 calc((100vw - 40px - 12px) / 2);
+        width: calc((100vw - 40px - 12px) / 2);
+        min-width: calc((100vw - 40px - 12px) / 2);
+        max-width: calc((100vw - 40px - 12px) / 2);
         scroll-snap-align: start;
         box-sizing: border-box;
     }
