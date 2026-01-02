@@ -2028,6 +2028,42 @@ body {
         background: #000 !important;
     }
     
+    /* Mobile Right Icons (Wishlist & Cart) */
+    .nav-right-mobile {
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 15px;
+        grid-column: 3;
+        z-index: 10004 !important;
+        position: relative;
+    }
+    
+    .mobile-icon-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        pointer-events: auto !important;
+        position: relative;
+    }
+    
+    .mobile-icon-link svg {
+        width: 20px;
+        height: 20px;
+        stroke: #000;
+    }
+    
+    .mobile-icon-link:active {
+        opacity: 0.7;
+    }
+    
     .nav-icons-header {
         display: flex;
         gap: 15px;
@@ -2037,7 +2073,7 @@ body {
         grid-column: 3;
     }
     
-    /* Pe mobile, ascunde toate iconițele din dreapta */
+    /* Pe mobile, ascunde toate iconițele din dreapta (desktop) */
     .nav-icons-header {
         display: none !important;
     }
