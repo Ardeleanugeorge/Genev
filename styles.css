@@ -1213,6 +1213,21 @@ body {
 .fashion-text {
     font-size: 14px;
     line-height: 1.7;
+}
+
+.statement-image {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 60px;
+}
+
+.statement-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
+}
     max-width: 1000px;
     margin: 20px auto;
     color: var(--text-light);
@@ -2399,6 +2414,11 @@ body {
     }
     
     .fashion-image {
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+    
+    .statement-image {
         margin: 30px auto;
         padding: 0 20px;
     }
