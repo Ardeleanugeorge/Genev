@@ -1213,6 +1213,11 @@ body {
 .fashion-text {
     font-size: 14px;
     line-height: 1.7;
+    max-width: 1000px;
+    margin: 20px auto;
+    color: var(--text-light);
+    font-weight: 300;
+    padding: 0 60px;
 }
 
 .statement-image {
@@ -1227,12 +1232,6 @@ body {
     display: block;
     object-fit: cover;
     border-radius: 4px;
-}
-    max-width: 1000px;
-    margin: 20px auto;
-    color: var(--text-light);
-    font-weight: 300;
-    padding: 0 60px;
 }
 
 /* Statement Section */
