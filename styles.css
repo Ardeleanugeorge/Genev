@@ -321,6 +321,11 @@ body {
     display: none;
 }
 
+/* Desktop: Hide mobile right nav */
+.nav-right-mobile {
+    display: none;
+}
+
 .mobile-search-icon {
     display: none;
 }
