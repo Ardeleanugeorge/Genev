@@ -1786,7 +1786,7 @@ body {
         pointer-events: auto !important;
         z-index: 10004 !important;
         position: relative;
-        margin-left: 8px;
+        margin-left: 4px;
     }
     
     .mobile-search-icon svg {
@@ -2038,7 +2038,7 @@ body {
         display: flex !important;
         align-items: center;
         justify-content: flex-end;
-        gap: 15px;
+        gap: 8px;
         grid-column: 3;
         z-index: 10004 !important;
         position: relative;
