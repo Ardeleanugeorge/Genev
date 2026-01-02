@@ -1170,6 +1170,20 @@ body {
     text-align: center;
 }
 
+.philosophy-image {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 60px;
+}
+
+.philosophy-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
 .philosophy-text {
     font-size: 14px;
     line-height: 1.7;
@@ -2367,6 +2381,11 @@ body {
     .fashion-text,
     .statement-text {
         font-size: 13px;
+        padding: 0 20px;
+    }
+    
+    .philosophy-image {
+        margin: 30px auto;
         padding: 0 20px;
     }
     
