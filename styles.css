@@ -1818,9 +1818,19 @@ body {
         text-align: left;
     }
     
+    /* Newsletter centrat pe mobil */
+    .footer-section:last-child h3:last-of-type {
+        text-align: center;
+    }
+    
+    .footer-section:last-child p {
+        text-align: center;
+    }
+    
     .footer-section:last-child .newsletter-form {
         max-width: 100%;
-        margin: 0;
+        margin: 0 auto;
+        align-items: center;
     }
     
     .newsletter-form {

@@ -317,10 +317,10 @@ function initProductsCarousel() {
         
         if (targetCardIndex >= 0 && targetCardIndex < allCards.length) {
             const targetCard = allCards[targetCardIndex];
-            const cardRect = targetCard.getBoundingClientRect();
-            const wrapperRect = carouselWrapper.getBoundingClientRect();
-            const scrollLeft = carouselWrapper.scrollLeft;
-            const targetScroll = scrollLeft + (cardRect.left - wrapperRect.left);
+            const cardWidth = targetCard.offsetWidth;
+            const gap = 12;
+            const pageWidth = (cardWidth + gap) * productsPerPage;
+            const targetScroll = pageIndex * pageWidth;
             
             carouselWrapper.scrollTo({
                 left: targetScroll,
@@ -374,6 +374,7 @@ function initProductsCarousel() {
         let startX = 0;
         let scrollLeft = 0;
         let isDown = false;
+        let isProgrammaticScroll = false; // Flag to prevent scroll loop
         
         // Function to update mobile page based on scroll position
         function updateMobilePageFromScroll() {
@@ -409,17 +410,36 @@ function initProductsCarousel() {
             }
         }
         
-        // Smooth scroll with snap
+        // Smooth scroll with snap - prevent infinite loop
         let scrollTimeout;
         carouselWrapper.addEventListener('scroll', () => {
+            // Ignore scroll events triggered by programmatic scrolling
+            if (isProgrammaticScroll) return;
+            
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
-                if (!isDown) {
+                if (!isDown && !isScrolling) {
                     updateMobilePageFromScroll();
-                    // Snap to nearest page after scroll ends
-                    scrollToMobilePage(currentMobilePage);
+                    // Only snap if user is not actively scrolling
+                    const productsPerPage = 2;
+                    const allCards = carouselWrapper.querySelectorAll('.product-card');
+                    if (allCards.length > 0) {
+                        const scrollPosition = carouselWrapper.scrollLeft;
+                        const cardWidth = allCards[0].offsetWidth;
+                        const gap = 12;
+                        const pageWidth = (cardWidth + gap) * productsPerPage;
+                        const currentPage = Math.round(scrollPosition / pageWidth);
+                        
+                        if (currentPage !== currentMobilePage && currentPage >= 0 && currentPage < totalMobilePages) {
+                            isProgrammaticScroll = true;
+                            scrollToMobilePage(currentPage);
+                            setTimeout(() => {
+                                isProgrammaticScroll = false;
+                            }, 300);
+                        }
+                    }
                 }
-            }, 150);
+            }, 200);
         });
         
         // Touch events for smooth scrolling
@@ -445,8 +465,12 @@ function initProductsCarousel() {
             // Snap to nearest page after touch ends
             setTimeout(() => {
                 updateMobilePageFromScroll();
+                isProgrammaticScroll = true;
                 scrollToMobilePage(currentMobilePage);
-            }, 100);
+                setTimeout(() => {
+                    isProgrammaticScroll = false;
+                }, 300);
+            }, 150);
         }, { passive: true });
         
         // Mouse drag support (for testing on desktop with mobile view)
@@ -469,8 +493,12 @@ function initProductsCarousel() {
                 // Snap to nearest page
                 setTimeout(() => {
                     updateMobilePageFromScroll();
+                    isProgrammaticScroll = true;
                     scrollToMobilePage(currentMobilePage);
-                }, 100);
+                    setTimeout(() => {
+                        isProgrammaticScroll = false;
+                    }, 300);
+                }, 150);
             }
         });
         
@@ -481,8 +509,12 @@ function initProductsCarousel() {
                 // Snap to nearest page
                 setTimeout(() => {
                     updateMobilePageFromScroll();
+                    isProgrammaticScroll = true;
                     scrollToMobilePage(currentMobilePage);
-                }, 100);
+                    setTimeout(() => {
+                        isProgrammaticScroll = false;
+                    }, 300);
+                }, 150);
             }
         });
         
