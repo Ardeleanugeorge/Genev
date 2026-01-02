@@ -1754,10 +1754,93 @@ body {
         padding: 0 50px;
     }
     
-    .footer-content,
+    /* Footer Mobile */
+    .footer {
+        padding: 50px 0 30px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 20px;
+        padding: 0 20px;
+        margin-bottom: 40px;
+    }
+    
+    .footer-section {
+        min-width: 0;
+    }
+    
+    .footer-section h3 {
+        font-size: 11px;
+        margin-bottom: 15px;
+        letter-spacing: 0.5px;
+    }
+    
+    .footer-section ul {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 8px;
+    }
+    
+    .footer-section a {
+        font-size: 12px;
+    }
+    
+    .footer-section p {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+    
+    /* Newsletter form pe mobil - ocupă toată lățimea */
+    .footer-section:last-child {
+        grid-column: 1 / -1;
+        margin-top: 10px;
+    }
+    
+    .footer-section:last-child h3 {
+        margin-top: 0;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .newsletter-form input {
+        width: 100%;
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .newsletter-form button {
+        width: 100%;
+        padding: 12px;
+        font-size: 12px;
+    }
+    
     .footer-bottom {
-        padding-left: 20px;
-        padding-right: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 25px 20px 0;
+        text-align: left;
+    }
+    
+    .footer-bottom p {
+        font-size: 11px;
+        margin: 0;
+    }
+    
+    .payment-methods {
+        gap: 10px;
+        justify-content: flex-start;
+    }
+    
+    .payment-methods span {
+        font-size: 10px;
     }
     
     .store-description,
