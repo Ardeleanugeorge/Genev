@@ -293,10 +293,12 @@ function initProductsCarousel() {
             }
         } else {
             // On desktop, use opacity/visibility
-            productGroups.forEach(group => group.classList.remove('active'));
-            if (productGroups[normalizedIndex]) {
-                productGroups[normalizedIndex].classList.add('active');
-            }
+            productGroups.forEach((group, idx) => {
+                group.classList.remove('active');
+                if (idx === normalizedIndex) {
+                    group.classList.add('active');
+                }
+            });
         }
         
         // Update pagination
@@ -459,7 +461,13 @@ function initProductsCarousel() {
     }
     
     // Initialize first group
-    showProductGroup(0);
+    if (!isMobile) {
+        // On desktop, show first group
+        showProductGroup(0);
+    } else {
+        // On mobile, initialize pagination
+        updatePagination();
+    }
     
     // Handle window resize
     window.addEventListener('resize', () => {
@@ -472,8 +480,11 @@ function initProductsCarousel() {
                 const allProducts = document.querySelectorAll('.products-carousel-group .product-card');
                 totalMobilePages = Math.ceil(allProducts.length / 2);
                 currentMobilePage = 0;
+            } else {
+                // Switch back to desktop, reset to first group
+                currentProductGroup = 0;
+                showProductGroup(0);
             }
-            showProductGroup(currentProductGroup);
             updatePagination();
         }
     });

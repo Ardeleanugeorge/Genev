@@ -1662,11 +1662,11 @@ body {
         max-width: 100%;
     }
     
-    /* Mobile Left: Hamburger + Search */
+    /* Mobile Left: Only Hamburger */
     .nav-left-mobile {
         display: flex;
         align-items: center;
-        gap: 15px;
+        justify-content: flex-start;
         grid-column: 1;
     }
     
@@ -1675,7 +1675,7 @@ body {
     }
     
     .mobile-search-icon {
-        display: flex;
+        display: none;
     }
     
     .container {
@@ -1793,41 +1793,9 @@ body {
         grid-column: 3;
     }
     
-    /* Pe mobile, ascunde toate iconițele din dreapta except cart */
-    .nav-icons-header .desktop-search-icon,
-    .nav-icons-header .icon-link[href="#account"],
-    .nav-icons-header .icon-link[href="#wishlist"],
-    .nav-icons-header .icon-link[href="#search"] {
+    /* Pe mobile, ascunde toate iconițele din dreapta */
+    .nav-icons-header {
         display: none !important;
-    }
-    
-    /* Pe mobile, afișează doar cart în dreapta */
-    .nav-icons-header .icon-link[href="#cart"] {
-        display: flex;
-    }
-    
-    /* Pe mobile, ascunde textul pentru cart, păstrează doar iconița */
-    .nav-icons-header .icon-link[href="#cart"] .icon-text {
-        display: none;
-    }
-    
-    /* Pe mobile, afișează doar iconița SVG pentru cart */
-    .nav-icons-header .icon-link[href="#cart"] svg {
-        display: block;
-        width: 20px;
-        height: 20px;
-    }
-    
-    /* Pe mobile, ascunde textul pentru search din stânga */
-    .nav-left-mobile .icon-link .icon-text {
-        display: none;
-    }
-    
-    /* Pe mobile, afișează doar iconița SVG pentru search */
-    .nav-left-mobile .icon-link svg {
-        display: block;
-        width: 20px;
-        height: 20px;
     }
     
     .nav-icons-header .icon-link {
