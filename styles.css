@@ -514,6 +514,10 @@ body {
 
 /* Mobile: Show 2 products with swipe */
 @media (max-width: 768px) {
+    .products-carousel-container {
+        padding: 0 20px;
+    }
+    
     .products-carousel-wrapper {
         overflow-x: auto;
         overflow-y: hidden;
@@ -522,6 +526,7 @@ body {
         scrollbar-width: none;
         -ms-overflow-style: none;
         cursor: grab;
+        scroll-behavior: smooth;
     }
     
     .products-carousel-wrapper::-webkit-scrollbar {
@@ -532,21 +537,25 @@ body {
         display: flex;
         flex-direction: row;
         gap: 12px;
+        width: max-content;
     }
     
     .products-carousel-group {
-        display: flex;
-        gap: 12px;
-        min-width: auto;
-        width: auto;
+        display: contents;
     }
     
     .products-carousel-group .product-card {
-        flex: 0 0 calc(50% - 6px);
+        flex: 0 0 calc(50vw - 26px);
+        width: calc(50vw - 26px);
+        min-width: calc(50vw - 26px);
+        max-width: calc(50vw - 26px);
         scroll-snap-align: start;
-        width: calc(50% - 6px);
-        max-width: calc(50% - 6px);
-        min-width: calc(66.666% - 6px);
+        box-sizing: border-box;
+    }
+    
+    /* Snap every 2 products (1 page) */
+    .products-carousel-group .product-card:nth-child(2n) {
+        scroll-snap-align: end;
     }
 }
 

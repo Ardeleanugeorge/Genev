@@ -261,7 +261,10 @@ function initProductsCarousel() {
     
     // On mobile: 2 products per page, on desktop: 4 products per group
     if (isMobile) {
-        totalMobilePages = Math.ceil(totalProducts / 2);
+        const productsPerPage = 2;
+        totalMobilePages = Math.ceil(totalProducts / productsPerPage);
+        // Ensure at least 1 page
+        if (totalMobilePages === 0) totalMobilePages = 1;
     }
     
     // Update pagination counter
@@ -303,22 +306,34 @@ function initProductsCarousel() {
         updatePagination();
     }
     
+    function scrollToMobilePage(pageIndex) {
+        if (!carouselWrapper || !isMobile) return;
+        
+        const allCards = carouselWrapper.querySelectorAll('.product-card');
+        if (allCards.length === 0) return;
+        
+        const productsPerPage = 2;
+        const targetCardIndex = pageIndex * productsPerPage;
+        
+        if (targetCardIndex >= 0 && targetCardIndex < allCards.length) {
+            const targetCard = allCards[targetCardIndex];
+            const cardRect = targetCard.getBoundingClientRect();
+            const wrapperRect = carouselWrapper.getBoundingClientRect();
+            const scrollLeft = carouselWrapper.scrollLeft;
+            const targetScroll = scrollLeft + (cardRect.left - wrapperRect.left);
+            
+            carouselWrapper.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
     function nextProductGroup() {
         if (isMobile) {
             // On mobile, scroll to next 2 products
             currentMobilePage = (currentMobilePage + 1) % totalMobilePages;
-            const cardWidth = carouselWrapper?.querySelector('.product-card')?.offsetWidth || 0;
-            const gap = 12;
-            const productsPerPage = 2;
-            const pageWidth = (cardWidth + gap) * productsPerPage;
-            const scrollPosition = currentMobilePage * pageWidth;
-            
-            if (carouselWrapper) {
-                carouselWrapper.scrollTo({
-                    left: scrollPosition,
-                    behavior: 'smooth'
-                });
-            }
+            scrollToMobilePage(currentMobilePage);
             updatePagination();
         } else {
             // On desktop, use groups
@@ -331,18 +346,7 @@ function initProductsCarousel() {
         if (isMobile) {
             // On mobile, scroll to previous 2 products
             currentMobilePage = (currentMobilePage - 1 + totalMobilePages) % totalMobilePages;
-            const cardWidth = carouselWrapper?.querySelector('.product-card')?.offsetWidth || 0;
-            const gap = 12;
-            const productsPerPage = 2;
-            const pageWidth = (cardWidth + gap) * productsPerPage;
-            const scrollPosition = currentMobilePage * pageWidth;
-            
-            if (carouselWrapper) {
-                carouselWrapper.scrollTo({
-                    left: scrollPosition,
-                    behavior: 'smooth'
-                });
-            }
+            scrollToMobilePage(currentMobilePage);
             updatePagination();
         } else {
             // On desktop, use groups
@@ -373,14 +377,31 @@ function initProductsCarousel() {
         
         // Function to update mobile page based on scroll position
         function updateMobilePageFromScroll() {
-            const scrollPosition = carouselWrapper.scrollLeft;
-            const cardWidth = carouselWrapper.querySelector('.product-card')?.offsetWidth || 0;
-            const gap = 12;
-            const productsPerPage = 2;
+            const allCards = carouselWrapper.querySelectorAll('.product-card');
+            if (allCards.length === 0) return;
             
-            // Calculate which page we're on (2 products per page)
-            const currentProductIndex = Math.round(scrollPosition / (cardWidth + gap));
-            const newPage = Math.floor(currentProductIndex / productsPerPage);
+            const scrollPosition = carouselWrapper.scrollLeft;
+            const wrapperRect = carouselWrapper.getBoundingClientRect();
+            const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
+            
+            // Find which card is closest to center
+            let closestCardIndex = 0;
+            let minDistance = Infinity;
+            
+            allCards.forEach((card, index) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.left + cardRect.width / 2;
+                const distance = Math.abs(cardCenter - wrapperCenter);
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestCardIndex = index;
+                }
+            });
+            
+            // Calculate page based on card index (2 products per page)
+            const productsPerPage = 2;
+            const newPage = Math.floor(closestCardIndex / productsPerPage);
             
             if (newPage !== currentMobilePage && newPage >= 0 && newPage < totalMobilePages) {
                 currentMobilePage = newPage;
@@ -388,73 +409,89 @@ function initProductsCarousel() {
             }
         }
         
-        carouselWrapper.addEventListener('touchstart', (e) => {
-            isDown = true;
-            startX = e.touches[0].pageX - carouselWrapper.offsetLeft;
-            scrollLeft = carouselWrapper.scrollLeft;
+        // Smooth scroll with snap
+        let scrollTimeout;
+        carouselWrapper.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (!isDown) {
+                    updateMobilePageFromScroll();
+                    // Snap to nearest page after scroll ends
+                    scrollToMobilePage(currentMobilePage);
+                }
+            }, 150);
         });
+        
+        // Touch events for smooth scrolling
+        let touchStartX = 0;
+        let touchStartScrollLeft = 0;
+        let isScrolling = false;
+        
+        carouselWrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartScrollLeft = carouselWrapper.scrollLeft;
+            isScrolling = true;
+        }, { passive: true });
         
         carouselWrapper.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.touches[0].pageX - carouselWrapper.offsetLeft;
-            const walk = (x - startX) * 2;
-            carouselWrapper.scrollLeft = scrollLeft - walk;
-        });
+            if (!isScrolling) return;
+            // Let native scroll handle it for smoothness
+        }, { passive: true });
         
         carouselWrapper.addEventListener('touchend', () => {
-            isDown = false;
-            // Snap to nearest 2 products (1 page)
-            const scrollPosition = carouselWrapper.scrollLeft;
-            const cardWidth = carouselWrapper.querySelector('.product-card')?.offsetWidth || 0;
-            const gap = 12;
-            const productsPerPage = 2;
-            const pageWidth = (cardWidth + gap) * productsPerPage;
-            const currentPage = Math.round(scrollPosition / pageWidth);
-            const snapPosition = currentPage * pageWidth;
+            if (!isScrolling) return;
+            isScrolling = false;
             
-            carouselWrapper.scrollTo({
-                left: snapPosition,
-                behavior: 'smooth'
-            });
-            
-            // Update page after scroll
+            // Snap to nearest page after touch ends
             setTimeout(() => {
                 updateMobilePageFromScroll();
-            }, 300);
-        });
-        
-        // Update page on scroll
-        carouselWrapper.addEventListener('scroll', () => {
-            if (!isDown) {
-                updateMobilePageFromScroll();
-            }
-        });
+                scrollToMobilePage(currentMobilePage);
+            }, 100);
+        }, { passive: true });
         
         // Mouse drag support (for testing on desktop with mobile view)
+        let mouseStartX = 0;
+        let mouseStartScrollLeft = 0;
+        let isMouseDown = false;
+        
         carouselWrapper.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - carouselWrapper.offsetLeft;
-            scrollLeft = carouselWrapper.scrollLeft;
+            isMouseDown = true;
+            mouseStartX = e.pageX;
+            mouseStartScrollLeft = carouselWrapper.scrollLeft;
             carouselWrapper.style.cursor = 'grabbing';
+            e.preventDefault();
         });
         
         carouselWrapper.addEventListener('mouseleave', () => {
-            isDown = false;
-            carouselWrapper.style.cursor = 'grab';
+            if (isMouseDown) {
+                isMouseDown = false;
+                carouselWrapper.style.cursor = 'grab';
+                // Snap to nearest page
+                setTimeout(() => {
+                    updateMobilePageFromScroll();
+                    scrollToMobilePage(currentMobilePage);
+                }, 100);
+            }
         });
         
         carouselWrapper.addEventListener('mouseup', () => {
-            isDown = false;
-            carouselWrapper.style.cursor = 'grab';
+            if (isMouseDown) {
+                isMouseDown = false;
+                carouselWrapper.style.cursor = 'grab';
+                // Snap to nearest page
+                setTimeout(() => {
+                    updateMobilePageFromScroll();
+                    scrollToMobilePage(currentMobilePage);
+                }, 100);
+            }
         });
         
         carouselWrapper.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
+            if (!isMouseDown) return;
             e.preventDefault();
-            const x = e.pageX - carouselWrapper.offsetLeft;
-            const walk = (x - startX) * 2;
-            carouselWrapper.scrollLeft = scrollLeft - walk;
+            const x = e.pageX;
+            const walk = (x - mouseStartX) * 1.5; // Smooth drag
+            carouselWrapper.scrollLeft = mouseStartScrollLeft - walk;
         });
     }
     
@@ -463,8 +500,13 @@ function initProductsCarousel() {
         // On desktop, show first group
         showProductGroup(0);
     } else {
-        // On mobile, initialize pagination
+        // On mobile, initialize pagination and scroll to first page
+        currentMobilePage = 0;
         updatePagination();
+        // Scroll to first page after a short delay to ensure DOM is ready
+        setTimeout(() => {
+            scrollToMobilePage(0);
+        }, 100);
     }
     
     // Handle window resize
@@ -476,8 +518,13 @@ function initProductsCarousel() {
             // Recalculate mobile pages if switching to mobile
             if (isMobile) {
                 const allProducts = document.querySelectorAll('.products-carousel-group .product-card');
-                totalMobilePages = Math.ceil(allProducts.length / 2);
+                const productsPerPage = 2;
+                totalMobilePages = Math.ceil(allProducts.length / productsPerPage);
+                if (totalMobilePages === 0) totalMobilePages = 1;
                 currentMobilePage = 0;
+                setTimeout(() => {
+                    scrollToMobilePage(0);
+                }, 100);
             } else {
                 // Switch back to desktop, reset to first group
                 currentProductGroup = 0;
