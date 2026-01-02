@@ -293,12 +293,14 @@ function initProductsCarousel() {
             }
         } else {
             // On desktop, use opacity/visibility
-            productGroups.forEach((group, idx) => {
+            // First, hide all groups immediately
+            productGroups.forEach(group => {
                 group.classList.remove('active');
-                if (idx === normalizedIndex) {
-                    group.classList.add('active');
-                }
             });
+            // Then show the active group
+            if (productGroups[normalizedIndex]) {
+                productGroups[normalizedIndex].classList.add('active');
+            }
         }
         
         // Update pagination

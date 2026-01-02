@@ -505,12 +505,21 @@ body {
     gap: 20px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.3s ease;
     width: 100%;
     box-sizing: border-box;
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: none;
+}
+
+.products-carousel-group.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
 }
 
 .products-carousel-group:first-child {
@@ -557,13 +566,6 @@ body {
         max-width: calc(66.666% - 6px);
         min-width: calc(66.666% - 6px);
     }
-}
-
-.products-carousel-group.active {
-    opacity: 1;
-    visibility: visible;
-    position: relative;
-    z-index: 1;
 }
 
 .products-carousel-group .product-card {
