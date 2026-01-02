@@ -293,13 +293,20 @@ function initProductsCarousel() {
             }
         } else {
             // On desktop, use opacity/visibility
-            // First, hide all groups immediately
-            productGroups.forEach(group => {
-                group.classList.remove('active');
-            });
-            // Then show the active group
-            if (productGroups[normalizedIndex]) {
-                productGroups[normalizedIndex].classList.add('active');
+            // Show new group first, then hide old ones to avoid blank screen
+            const newGroup = productGroups[normalizedIndex];
+            const oldActiveGroup = document.querySelector('.products-carousel-group.active');
+            
+            if (newGroup) {
+                // Add active class to new group first
+                newGroup.classList.add('active');
+                // Force reflow to ensure the new group is visible
+                newGroup.offsetHeight;
+                
+                // Then remove active from old group
+                if (oldActiveGroup && oldActiveGroup !== newGroup) {
+                    oldActiveGroup.classList.remove('active');
+                }
             }
         }
         
