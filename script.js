@@ -244,25 +244,11 @@ function initProductsCarousel() {
     const nextBtn = document.querySelector('.products-carousel-next-btn');
     const carouselWrapper = document.querySelector('.products-carousel-wrapper');
     const carouselTrack = document.querySelector('.products-carousel-track');
-    const paginationPrev = document.querySelector('.carousel-pagination-prev');
-    const paginationNext = document.querySelector('.carousel-pagination-next');
-    const currentPageSpan = document.querySelector('.current-page');
-    const totalPagesSpan = document.querySelector('.total-pages');
     
     if (productGroups.length === 0) return;
     
     totalProductGroups = productGroups.length;
     isMobile = window.innerWidth <= 768;
-    
-    // Update pagination counter
-    function updatePagination() {
-        if (currentPageSpan) {
-            currentPageSpan.textContent = currentProductGroup + 1;
-        }
-        if (totalPagesSpan) {
-            totalPagesSpan.textContent = totalProductGroups;
-        }
-    }
     
     function showProductGroup(index) {
         // Normalize index for infinite loop
@@ -286,9 +272,6 @@ function initProductsCarousel() {
             }
         }
         
-        // Update pagination
-        updatePagination();
-        
         // Never hide next button - infinite loop
         if (nextBtn) {
             nextBtn.classList.remove('hidden');
@@ -301,30 +284,10 @@ function initProductsCarousel() {
         showProductGroup(currentProductGroup);
     }
     
-    function prevProductGroup() {
-        // Infinite loop - go to previous, wrap around to last
-        currentProductGroup = (currentProductGroup - 1 + totalProductGroups) % totalProductGroups;
-        showProductGroup(currentProductGroup);
-    }
-    
     if (nextBtn) {
         nextBtn.addEventListener('click', (e) => {
             e.preventDefault();
             nextProductGroup();
-        });
-    }
-    
-    if (paginationNext) {
-        paginationNext.addEventListener('click', (e) => {
-            e.preventDefault();
-            nextProductGroup();
-        });
-    }
-    
-    if (paginationPrev) {
-        paginationPrev.addEventListener('click', (e) => {
-            e.preventDefault();
-            prevProductGroup();
         });
     }
     
@@ -439,14 +402,14 @@ function initProductsCarousel() {
 
 // Search Functionality
 function initSearch() {
-    const searchTrigger = document.querySelector('.search-trigger');
+    const searchTriggers = document.querySelectorAll('.search-trigger');
     const searchModal = document.getElementById('searchModal');
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
     const searchClose = document.querySelector('.search-modal-close');
     const searchOverlay = document.querySelector('.search-modal-overlay');
     
-    if (!searchTrigger || !searchModal || !searchInput || !searchResults) return;
+    if (searchTriggers.length === 0 || !searchModal || !searchInput || !searchResults) return;
     
     // Collect all products from the page
     function getAllProducts() {
@@ -528,9 +491,12 @@ function initSearch() {
     }
     
     // Event listeners
-    searchTrigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        openSearch();
+    // Open search modal - works for both desktop and mobile
+    searchTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            openSearch();
+        });
     });
     
     searchClose?.addEventListener('click', closeSearch);

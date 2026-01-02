@@ -15,12 +15,18 @@
         <nav class="navbar">
             <div class="nav-overlay"></div>
             <div class="nav-container">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <!-- Left: Hamburger + Search (Mobile) -->
+                <div class="nav-left-mobile">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <a href="javascript:void(0);" class="icon-link search-icon search-trigger mobile-search-icon" title="Search">
+                        <span class="icon-text">Search</span>
+                    </a>
                 </div>
-                <!-- Left: Menu -->
+                <!-- Left: Menu (Desktop) -->
                 <div class="nav-menu-left">
                     <ul class="nav-menu">
                         <li class="nav-item-dropdown">
@@ -60,7 +66,7 @@
                 </div>
                 <!-- Right: Icons -->
                 <div class="nav-icons-header">
-                    <a href="#search" class="icon-link search-trigger" title="Search">
+                    <a href="#search" class="icon-link search-trigger desktop-search-icon" title="Search">
                         <span class="icon-text">Search</span>
                     </a>
                     <a href="#account" class="icon-link" title="Account">
@@ -207,23 +213,6 @@
                         <path d="M9 18l6-6-6-6"/>
                     </svg>
                 </button>
-                
-                <!-- Carousel Pagination -->
-                <div class="products-carousel-pagination">
-                    <button class="carousel-pagination-btn carousel-pagination-prev" aria-label="Previous">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 18l-6-6 6-6"/>
-                        </svg>
-                    </button>
-                    <span class="carousel-pagination-counter">
-                        <span class="current-page">1</span> / <span class="total-pages">2</span>
-                    </span>
-                    <button class="carousel-pagination-btn carousel-pagination-next" aria-label="Next">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </button>
-                </div>
             </div>
             
             <!-- Category Images -->
