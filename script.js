@@ -1,52 +1,78 @@
-// Mobile Menu Toggle - Initialize on DOM ready
+// Mobile Menu Toggle - Simple and direct
 function initMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenuLeft = document.querySelector('.nav-menu-left');
-    const navOverlay = document.querySelector('.nav-overlay');
-    
-    if (!hamburger || !navMenuLeft || !navOverlay) {
-        console.error('Mobile menu elements not found');
-        return;
-    }
-    
-    console.log('Mobile menu initialized');
-    
-    // Toggle menu on hamburger click
-    hamburger.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Hamburger clicked');
+    // Wait a bit to ensure DOM is ready
+    setTimeout(() => {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenuLeft = document.querySelector('.nav-menu-left');
+        const navOverlay = document.querySelector('.nav-overlay');
         
-        navMenuLeft.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-        hamburger.classList.toggle('active');
+        console.log('Looking for menu elements:', {
+            hamburger: !!hamburger,
+            navMenuLeft: !!navMenuLeft,
+            navOverlay: !!navOverlay
+        });
         
-        // Prevent body scroll when menu is open
-        if (navMenuLeft.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
+        if (!hamburger) {
+            console.error('Hamburger not found!');
+            return;
         }
-    });
-    
-    // Close menu when clicking on overlay
-    navOverlay.addEventListener('click', () => {
-        navMenuLeft.classList.remove('active');
-        navOverlay.classList.remove('active');
-        hamburger.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    
-    // Close menu when clicking on a link
-    const navLinks = navMenuLeft.querySelectorAll('.nav-menu a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        
+        if (!navMenuLeft) {
+            console.error('Nav menu not found!');
+            return;
+        }
+        
+        if (!navOverlay) {
+            console.error('Nav overlay not found!');
+            return;
+        }
+        
+        console.log('Mobile menu initialized successfully');
+        
+        // Toggle menu on hamburger click
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Hamburger clicked!');
+            
+            const isActive = navMenuLeft.classList.contains('active');
+            
+            if (isActive) {
+                navMenuLeft.classList.remove('active');
+                navOverlay.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = '';
+                console.log('Menu closed');
+            } else {
+                navMenuLeft.classList.add('active');
+                navOverlay.classList.add('active');
+                hamburger.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('Menu opened');
+            }
+        });
+        
+        // Close menu when clicking on overlay
+        navOverlay.addEventListener('click', function() {
             navMenuLeft.classList.remove('active');
             navOverlay.classList.remove('active');
             hamburger.classList.remove('active');
             document.body.style.overflow = '';
+            console.log('Menu closed via overlay');
         });
-    });
+        
+        // Close menu when clicking on a link
+        const navLinks = navMenuLeft.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenuLeft.classList.remove('active');
+                navOverlay.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = '';
+                console.log('Menu closed via link');
+            });
+        });
+    }, 100);
 }
 
 // Color Selection
