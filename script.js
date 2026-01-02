@@ -250,7 +250,7 @@ function initProductsCarousel() {
     const currentPageSpan = document.querySelector('.current-page');
     const totalPagesSpan = document.querySelector('.total-pages');
     
-    if (productGroups.length === 0) return;
+    if (productGroups.length === 0 || !carouselTrack) return;
     
     totalProductGroups = productGroups.length;
     isMobile = window.innerWidth <= 768;
@@ -292,21 +292,10 @@ function initProductsCarousel() {
                 });
             }
         } else {
-            // On desktop, use opacity/visibility
-            // Show new group first, then hide old ones to avoid blank screen
-            const newGroup = productGroups[normalizedIndex];
-            const oldActiveGroup = document.querySelector('.products-carousel-group.active');
-            
-            if (newGroup) {
-                // Add active class to new group first
-                newGroup.classList.add('active');
-                // Force reflow to ensure the new group is visible
-                newGroup.offsetHeight;
-                
-                // Then remove active from old group
-                if (oldActiveGroup && oldActiveGroup !== newGroup) {
-                    oldActiveGroup.classList.remove('active');
-                }
+            // On desktop, use transform translate
+            if (carouselTrack) {
+                const translateX = -normalizedIndex * 100;
+                carouselTrack.style.transform = `translateX(${translateX}%)`;
             }
         }
         
