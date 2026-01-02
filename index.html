@@ -535,6 +535,58 @@
     </div>
 
     <script src="script.js"></script>
+    <!-- Mobile Menu Script - Inline for maximum reliability -->
+    <script>
+        // Simple mobile menu toggle - works immediately
+        function toggleMenu() {
+            var menu = document.querySelector('.nav-menu-left');
+            var overlay = document.querySelector('.nav-overlay');
+            var btn = document.getElementById('hamburgerBtn');
+            
+            if (!menu || !overlay || !btn) return;
+            
+            var isOpen = menu.classList.contains('active');
+            
+            if (isOpen) {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                btn.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                menu.classList.add('active');
+                overlay.classList.add('active');
+                btn.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        // Close menu on overlay click
+        document.addEventListener('DOMContentLoaded', function() {
+            var overlay = document.querySelector('.nav-overlay');
+            var menu = document.querySelector('.nav-menu-left');
+            var btn = document.getElementById('hamburgerBtn');
+            
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    if (menu) menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    if (btn) btn.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // Close on link click
+            var links = document.querySelectorAll('.nav-menu-left .nav-menu a');
+            links.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (menu) menu.classList.remove('active');
+                    if (overlay) overlay.classList.remove('active');
+                    if (btn) btn.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 
