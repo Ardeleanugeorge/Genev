@@ -574,6 +574,7 @@ function initSearch() {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('GENEV website loaded successfully');
+    initMobileMenu();
     initCarousel();
     initProductsCarousel();
     initSearch();
