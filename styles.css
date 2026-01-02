@@ -1811,14 +1811,26 @@ body {
         margin-bottom: 12px;
     }
     
-    /* Newsletter form pe mobil - ocupă toată lățimea */
+    /* Ultima secțiune (About cu Newsletter) - centrată dacă nu are pereche */
     .footer-section:last-child {
         grid-column: 1 / -1;
-        margin-top: 10px;
+        margin-top: 20px;
+        text-align: center;
+        max-width: 100%;
     }
     
     .footer-section:last-child h3 {
         margin-top: 0;
+    }
+    
+    .footer-section:last-child ul {
+        text-align: left;
+        display: inline-block;
+    }
+    
+    .footer-section:last-child .newsletter-form {
+        max-width: 400px;
+        margin: 0 auto;
     }
     
     .newsletter-form {
