@@ -1712,11 +1712,8 @@ body {
         padding: 0;
     }
     
+    /* Pe mobile, afișează logo-ul negru (cel de pe web) */
     .logo-img {
-        display: none;
-    }
-    
-    .logo-img-mobile {
         display: block;
         max-height: 40px;
         width: auto;
@@ -1724,17 +1721,21 @@ body {
         object-fit: contain;
     }
     
-    /* Când header-ul este scrolled, schimbă logo-ul */
-    .header--scrolled .logo-img-mobile {
+    .logo-img-mobile {
         display: none;
     }
     
+    /* Când header-ul este scrolled, păstrează logo-ul negru */
     .header--scrolled .logo-img {
         display: block;
         max-height: 40px;
         width: auto;
         height: auto;
         object-fit: contain;
+    }
+    
+    .header--scrolled .logo-img-mobile {
+        display: none;
     }
     
     .header--scrolled .logo {
@@ -1754,7 +1755,7 @@ body {
     }
     
     .hamburger span {
-        background: var(--secondary-color);
+        background: var(--text-dark);
         width: 22px;
         height: 2px;
     }
@@ -1778,8 +1779,8 @@ body {
     }
     
     .nav-icons-header .icon-link {
-        color: var(--secondary-color);
-        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        color: var(--text-dark);
+        filter: none;
     }
     
     .header--scrolled .nav-icons-header .icon-link {
@@ -1788,8 +1789,8 @@ body {
     }
     
     .nav-left-mobile .icon-link {
-        color: var(--secondary-color);
-        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        color: var(--text-dark);
+        filter: none;
     }
     
     .header--scrolled .nav-left-mobile .icon-link {
