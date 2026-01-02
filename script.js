@@ -241,14 +241,27 @@ let isMobile = window.innerWidth <= 768;
 
 function initProductsCarousel() {
     const productGroups = document.querySelectorAll('.products-carousel-group');
-    const nextBtn = document.querySelector('.products-carousel-next-btn');
     const carouselWrapper = document.querySelector('.products-carousel-wrapper');
     const carouselTrack = document.querySelector('.products-carousel-track');
+    const paginationPrev = document.querySelector('.carousel-pagination-prev');
+    const paginationNext = document.querySelector('.carousel-pagination-next');
+    const currentPageSpan = document.querySelector('.current-page');
+    const totalPagesSpan = document.querySelector('.total-pages');
     
     if (productGroups.length === 0) return;
     
     totalProductGroups = productGroups.length;
     isMobile = window.innerWidth <= 768;
+    
+    // Update pagination counter
+    function updatePagination() {
+        if (currentPageSpan) {
+            currentPageSpan.textContent = currentProductGroup + 1;
+        }
+        if (totalPagesSpan) {
+            totalPagesSpan.textContent = totalProductGroups;
+        }
+    }
     
     function showProductGroup(index) {
         // Normalize index for infinite loop
@@ -272,10 +285,8 @@ function initProductsCarousel() {
             }
         }
         
-        // Never hide next button - infinite loop
-        if (nextBtn) {
-            nextBtn.classList.remove('hidden');
-        }
+        // Update pagination
+        updatePagination();
     }
     
     function nextProductGroup() {
@@ -284,10 +295,23 @@ function initProductsCarousel() {
         showProductGroup(currentProductGroup);
     }
     
-    if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
+    function prevProductGroup() {
+        // Infinite loop - go to previous, wrap around to last
+        currentProductGroup = (currentProductGroup - 1 + totalProductGroups) % totalProductGroups;
+        showProductGroup(currentProductGroup);
+    }
+    
+    if (paginationNext) {
+        paginationNext.addEventListener('click', (e) => {
             e.preventDefault();
             nextProductGroup();
+        });
+    }
+    
+    if (paginationPrev) {
+        paginationPrev.addEventListener('click', (e) => {
+            e.preventDefault();
+            prevProductGroup();
         });
     }
     
