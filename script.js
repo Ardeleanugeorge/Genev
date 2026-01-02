@@ -234,9 +234,11 @@ function initCarousel() {
     }
 }
 
-// Products Carousel - 4 products per group
+// Products Carousel - 4 products per group on desktop, 2 on mobile
 let currentProductGroup = 0;
 let totalProductGroups = 0;
+let currentMobilePage = 0;
+let totalMobilePages = 0;
 let isMobile = window.innerWidth <= 768;
 
 function initProductsCarousel() {
@@ -253,13 +255,25 @@ function initProductsCarousel() {
     totalProductGroups = productGroups.length;
     isMobile = window.innerWidth <= 768;
     
+    // Calculate total products
+    const allProducts = document.querySelectorAll('.products-carousel-group .product-card');
+    const totalProducts = allProducts.length;
+    
+    // On mobile: 2 products per page, on desktop: 4 products per group
+    if (isMobile) {
+        totalMobilePages = Math.ceil(totalProducts / 2);
+    }
+    
     // Update pagination counter
     function updatePagination() {
-        if (currentPageSpan) {
-            currentPageSpan.textContent = currentProductGroup + 1;
-        }
-        if (totalPagesSpan) {
-            totalPagesSpan.textContent = totalProductGroups;
+        if (currentPageSpan && totalPagesSpan) {
+            if (isMobile) {
+                currentPageSpan.textContent = currentMobilePage + 1;
+                totalPagesSpan.textContent = totalMobilePages;
+            } else {
+                currentPageSpan.textContent = currentProductGroup + 1;
+                totalPagesSpan.textContent = totalProductGroups;
+            }
         }
     }
     
@@ -290,15 +304,51 @@ function initProductsCarousel() {
     }
     
     function nextProductGroup() {
-        // Infinite loop - always go to next, wrap around to 0
-        currentProductGroup = (currentProductGroup + 1) % totalProductGroups;
-        showProductGroup(currentProductGroup);
+        if (isMobile) {
+            // On mobile, scroll to next 2 products
+            currentMobilePage = (currentMobilePage + 1) % totalMobilePages;
+            const cardWidth = carouselWrapper?.querySelector('.product-card')?.offsetWidth || 0;
+            const gap = 12;
+            const productsPerPage = 2;
+            const pageWidth = (cardWidth + gap) * productsPerPage;
+            const scrollPosition = currentMobilePage * pageWidth;
+            
+            if (carouselWrapper) {
+                carouselWrapper.scrollTo({
+                    left: scrollPosition,
+                    behavior: 'smooth'
+                });
+            }
+            updatePagination();
+        } else {
+            // On desktop, use groups
+            currentProductGroup = (currentProductGroup + 1) % totalProductGroups;
+            showProductGroup(currentProductGroup);
+        }
     }
     
     function prevProductGroup() {
-        // Infinite loop - go to previous, wrap around to last
-        currentProductGroup = (currentProductGroup - 1 + totalProductGroups) % totalProductGroups;
-        showProductGroup(currentProductGroup);
+        if (isMobile) {
+            // On mobile, scroll to previous 2 products
+            currentMobilePage = (currentMobilePage - 1 + totalMobilePages) % totalMobilePages;
+            const cardWidth = carouselWrapper?.querySelector('.product-card')?.offsetWidth || 0;
+            const gap = 12;
+            const productsPerPage = 2;
+            const pageWidth = (cardWidth + gap) * productsPerPage;
+            const scrollPosition = currentMobilePage * pageWidth;
+            
+            if (carouselWrapper) {
+                carouselWrapper.scrollTo({
+                    left: scrollPosition,
+                    behavior: 'smooth'
+                });
+            }
+            updatePagination();
+        } else {
+            // On desktop, use groups
+            currentProductGroup = (currentProductGroup - 1 + totalProductGroups) % totalProductGroups;
+            showProductGroup(currentProductGroup);
+        }
     }
     
     if (paginationNext) {
@@ -315,47 +365,28 @@ function initProductsCarousel() {
         });
     }
     
-    // Touch/swipe support for mobile with infinite scroll
+    // Touch/swipe support for mobile with scroll-based pagination
     if (isMobile && carouselWrapper) {
         let startX = 0;
         let scrollLeft = 0;
         let isDown = false;
         
-        // Clone first and last groups for infinite scroll
-        const firstGroup = productGroups[0];
-        const lastGroup = productGroups[productGroups.length - 1];
-        if (firstGroup && lastGroup && carouselTrack) {
-            const firstClone = firstGroup.cloneNode(true);
-            firstClone.classList.add('clone', 'clone-first');
-            const lastClone = lastGroup.cloneNode(true);
-            lastClone.classList.add('clone', 'clone-last');
+        // Function to update mobile page based on scroll position
+        function updateMobilePageFromScroll() {
+            const scrollPosition = carouselWrapper.scrollLeft;
+            const cardWidth = carouselWrapper.querySelector('.product-card')?.offsetWidth || 0;
+            const gap = 12;
+            const productsPerPage = 2;
             
-            carouselTrack.insertBefore(lastClone, firstGroup);
-            carouselTrack.appendChild(firstClone);
+            // Calculate which page we're on (2 products per page)
+            const currentProductIndex = Math.round(scrollPosition / (cardWidth + gap));
+            const newPage = Math.floor(currentProductIndex / productsPerPage);
             
-            // Scroll to first real group
-            setTimeout(() => {
-                carouselWrapper.scrollLeft = lastClone.offsetWidth;
-            }, 100);
-        }
-        
-        // Handle infinite scroll
-        carouselWrapper.addEventListener('scroll', () => {
-            if (!isDown) {
-                const scrollPos = carouselWrapper.scrollLeft;
-                const wrapperWidth = carouselWrapper.offsetWidth;
-                const trackWidth = carouselTrack.offsetWidth;
-                
-                // If scrolled to clone at the end, jump to real start
-                if (scrollPos >= trackWidth - wrapperWidth - 50) {
-                    carouselWrapper.scrollLeft = wrapperWidth;
-                }
-                // If scrolled to clone at the start, jump to real end
-                else if (scrollPos <= 50) {
-                    carouselWrapper.scrollLeft = trackWidth - wrapperWidth * 2;
-                }
+            if (newPage !== currentMobilePage && newPage >= 0 && newPage < totalMobilePages) {
+                currentMobilePage = newPage;
+                updatePagination();
             }
-        });
+        }
         
         carouselWrapper.addEventListener('touchstart', (e) => {
             isDown = true;
@@ -373,15 +404,31 @@ function initProductsCarousel() {
         
         carouselWrapper.addEventListener('touchend', () => {
             isDown = false;
-            // Snap to nearest product
+            // Snap to nearest 2 products (1 page)
             const scrollPosition = carouselWrapper.scrollLeft;
             const cardWidth = carouselWrapper.querySelector('.product-card')?.offsetWidth || 0;
             const gap = 12;
-            const snapPosition = Math.round(scrollPosition / (cardWidth + gap)) * (cardWidth + gap);
+            const productsPerPage = 2;
+            const pageWidth = (cardWidth + gap) * productsPerPage;
+            const currentPage = Math.round(scrollPosition / pageWidth);
+            const snapPosition = currentPage * pageWidth;
+            
             carouselWrapper.scrollTo({
                 left: snapPosition,
                 behavior: 'smooth'
             });
+            
+            // Update page after scroll
+            setTimeout(() => {
+                updateMobilePageFromScroll();
+            }, 300);
+        });
+        
+        // Update page on scroll
+        carouselWrapper.addEventListener('scroll', () => {
+            if (!isDown) {
+                updateMobilePageFromScroll();
+            }
         });
         
         // Mouse drag support (for testing on desktop with mobile view)
@@ -418,8 +465,16 @@ function initProductsCarousel() {
     window.addEventListener('resize', () => {
         const wasMobile = isMobile;
         isMobile = window.innerWidth <= 768;
+        
         if (wasMobile !== isMobile) {
+            // Recalculate mobile pages if switching to mobile
+            if (isMobile) {
+                const allProducts = document.querySelectorAll('.products-carousel-group .product-card');
+                totalMobilePages = Math.ceil(allProducts.length / 2);
+                currentMobilePage = 0;
+            }
             showProductGroup(currentProductGroup);
+            updatePagination();
         }
     });
 }

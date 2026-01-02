@@ -1726,10 +1726,10 @@ body {
         align-items: center;
     }
     
-    /* Pe mobile, afișează logo-ul negru (cel de pe web) */
+    /* Pe mobile, afișează logo-ul negru (cel de pe web) - 30% mai mic */
     .logo-img {
         display: block;
-        max-height: 40px;
+        max-height: 28px;
         width: auto;
         height: auto;
         object-fit: contain;
@@ -1739,10 +1739,10 @@ body {
         display: none;
     }
     
-    /* Când header-ul este scrolled, păstrează logo-ul negru */
+    /* Când header-ul este scrolled, păstrează logo-ul negru centrat */
     .header--scrolled .logo-img {
         display: block;
-        max-height: 40px;
+        max-height: 28px;
         width: auto;
         height: auto;
         object-fit: contain;
@@ -1752,9 +1752,15 @@ body {
         display: none;
     }
     
+    /* Logo-ul rămâne centrat când header-ul este scrolled */
     .header--scrolled .logo {
+        grid-column: 2;
+        position: relative;
         top: auto;
         transform: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .hamburger {
@@ -1782,15 +1788,22 @@ body {
         display: flex;
         gap: 15px;
         align-items: center;
+        justify-content: flex-end;
         position: relative;
         grid-column: 3;
     }
     
-    /* Pe mobile, afișează doar cart (ca Rouje) */
+    /* Pe mobile, ascunde toate iconițele din dreapta except cart */
     .nav-icons-header .desktop-search-icon,
     .nav-icons-header .icon-link[href="#account"],
-    .nav-icons-header .icon-link[href="#wishlist"] {
-        display: none;
+    .nav-icons-header .icon-link[href="#wishlist"],
+    .nav-icons-header .icon-link[href="#search"] {
+        display: none !important;
+    }
+    
+    /* Pe mobile, afișează doar cart în dreapta */
+    .nav-icons-header .icon-link[href="#cart"] {
+        display: flex;
     }
     
     /* Pe mobile, ascunde textul pentru cart, păstrează doar iconița */
@@ -1974,9 +1987,15 @@ body {
         min-height: 55px;
     }
     
+    /* Logo-ul rămâne centrat când header-ul este scrolled pe mobile */
     .header--scrolled .logo {
-        top: 50%;
-        transform: translate(-50%, calc(-50% + 5px));
+        grid-column: 2;
+        position: relative;
+        top: auto;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .nav-icons-header {
@@ -1988,8 +2007,9 @@ body {
         height: 16px;
     }
     
+    /* Logo-ul este 30% mai mic când header-ul este scrolled */
     .header--scrolled .logo-img {
-        max-height: 35px;
+        max-height: 28px;
     }
     
     /* Hero Carousel Mobile */
