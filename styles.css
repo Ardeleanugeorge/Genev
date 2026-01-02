@@ -490,25 +490,16 @@ body {
 }
 
 .products-carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    will-change: transform;
-}
-
-.products-carousel-group {
-    min-width: 100%;
-    flex-shrink: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     width: 100%;
-    box-sizing: border-box;
 }
 
 @media (min-width: 1025px) {
-    .products-carousel-group {
-        grid-template-columns: repeat(4, 1fr) !important;
-        gap: 20px !important;
+    .products-carousel-track {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
     }
 }
 
@@ -541,12 +532,6 @@ body {
         width: max-content;
     }
     
-    .products-carousel-group {
-        display: contents;
-    }
-    
-    /* Toate cardurile au aceeași dimensiune, indiferent de structură */
-    .products-carousel-track > .products-carousel-group > .product-card,
     .products-carousel-track .product-card {
         flex: 0 0 calc((100vw - 40px - 12px) / 2);
         width: calc((100vw - 40px - 12px) / 2);
@@ -558,19 +543,6 @@ body {
         flex-direction: column;
     }
     
-    /* Asigură că wrapper-ul de imagini ocupă spațiul corect */
-    .products-carousel-track .product-image-wrapper {
-        width: 100%;
-        flex-shrink: 0;
-    }
-    
-    /* Asigură că imaginile simple ocupă spațiul corect */
-    .products-carousel-track .product-card > img:not(.product-image-main):not(.product-image-hover) {
-        width: 100%;
-        flex-shrink: 0;
-    }
-    
-    /* Snap every 2 products (1 page) - folosește selector universal */
     .products-carousel-track .product-card:nth-child(2n) {
         scroll-snap-align: end;
     }
@@ -1372,6 +1344,32 @@ body {
     font-weight: 300;
 }
 
+/* Footer Newsletter - Separate Section */
+.footer-newsletter {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 60px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-newsletter h3 {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dark);
+}
+
+.footer-newsletter p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    font-weight: 300;
+}
+
 .newsletter-form {
     display: flex;
     gap: 10px;
@@ -1811,31 +1809,27 @@ body {
         margin-bottom: 12px;
     }
     
-    /* Ultima secțiune (About cu Newsletter) - rămâne în grid normal */
-    .footer-section:last-child {
-        grid-column: auto;
-        margin-top: 0;
-        text-align: left;
-    }
-    
-    /* Newsletter centrat pe mobil */
-    .footer-section:last-child h3:last-of-type {
+    /* Footer Newsletter pe mobil */
+    .footer-newsletter {
+        padding: 30px 20px;
         text-align: center;
     }
     
-    .footer-section:last-child p {
-        text-align: center;
+    .footer-newsletter h3 {
+        font-size: 11px;
+        margin-bottom: 12px;
     }
     
-    .footer-section:last-child .newsletter-form {
+    .footer-newsletter p {
+        font-size: 12px;
+        margin-bottom: 15px;
         max-width: 100%;
-        margin: 0 auto;
-        align-items: center;
     }
     
     .newsletter-form {
         flex-direction: column;
         gap: 12px;
+        max-width: 100%;
     }
     
     .newsletter-form input {
