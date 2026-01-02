@@ -1,13 +1,26 @@
-// Mobile Menu Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenuLeft = document.querySelector('.nav-menu-left');
-const navOverlay = document.querySelector('.nav-overlay');
-
-if (hamburger && navMenuLeft && navOverlay) {
-    hamburger.addEventListener('click', () => {
+// Mobile Menu Toggle - Initialize on DOM ready
+function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenuLeft = document.querySelector('.nav-menu-left');
+    const navOverlay = document.querySelector('.nav-overlay');
+    
+    if (!hamburger || !navMenuLeft || !navOverlay) {
+        console.error('Mobile menu elements not found');
+        return;
+    }
+    
+    console.log('Mobile menu initialized');
+    
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Hamburger clicked');
+        
         navMenuLeft.classList.toggle('active');
         navOverlay.classList.toggle('active');
         hamburger.classList.toggle('active');
+        
         // Prevent body scroll when menu is open
         if (navMenuLeft.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
