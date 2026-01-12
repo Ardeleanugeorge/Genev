@@ -2345,6 +2345,10 @@ body {
         background-image: url('sl5.jpg') !important;
     }
     
+    .carousel-slide[data-mobile-image="coats-jackets.jpg"] {
+        background-image: url('coats-jackets.jpg') !important;
+    }
+    
     .carousel-container {
         width: 100%;
         max-width: 100%;
