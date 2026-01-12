@@ -143,6 +143,14 @@ body {
     grid-column: 2;
 }
 
+.logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .logo-img {
     max-height: 50px;
     width: auto;
