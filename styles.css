@@ -251,7 +251,7 @@ body {
 /* Dropdown title/heading */
 .nav-dropdown-title {
     display: block;
-    padding: 12px 20px 8px 20px;
+    padding: 10px 20px;
     color: var(--text-dark);
     font-size: 11px;
     font-weight: 600;
