@@ -150,6 +150,10 @@ function initCarousel() {
     }
 
     function startCarousel() {
+        // Clear any existing interval first
+        if (carouselInterval) {
+            clearInterval(carouselInterval);
+        }
         carouselInterval = setInterval(() => {
             nextSlide();
         }, 5000); // Change slide every 5 seconds
@@ -157,6 +161,7 @@ function initCarousel() {
 
     function resetCarousel() {
         clearInterval(carouselInterval);
+        carouselInterval = null;
         startCarousel();
     }
 
