@@ -2369,8 +2369,8 @@ body {
         background-image: url('sl5.jpg') !important;
     }
     
-    .carousel-slide[data-mobile-image="slider 1.jpg"] {
-        background-image: url('slider 1.jpg') !important;
+    .carousel-slide[data-mobile-image="slider 1-1.jpg"] {
+        background-image: url('slider 1-1.jpg') !important;
     }
     
     .carousel-container {
