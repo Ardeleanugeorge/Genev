@@ -257,14 +257,14 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 8px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0;
     pointer-events: none;
 }
 
-.nav-dropdown-title:first-child {
-    margin-top: 0;
-    border-top: none;
+.nav-dropdown-title:not(:first-child) {
+    margin-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 9px;
 }
 
 /* Nested submenu (submenu inside dropdown) */
