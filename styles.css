@@ -248,6 +248,20 @@ body {
     background: var(--hover-gray);
 }
 
+/* Nested submenu (submenu inside dropdown) */
+.nav-dropdown .nav-item-dropdown {
+    position: relative;
+}
+
+.nav-dropdown .nav-item-dropdown .nav-dropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-top: 0;
+    margin-left: 10px;
+    min-width: 200px;
+}
+
 .nav-menu a:hover {
     color: var(--accent-color);
 }
