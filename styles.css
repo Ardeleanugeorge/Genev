@@ -2357,8 +2357,8 @@ body {
         background-image: url('slider 2.jpg') !important;
     }
     
-    .carousel-slide[data-mobile-image="sl3.jpg"] {
-        background-image: url('sl3.jpg') !important;
+    .carousel-slide[data-mobile-image="slider 3.jpg"] {
+        background-image: url('slider 3.jpg') !important;
     }
     
     .carousel-slide[data-mobile-image="sl4.jpg"] {
