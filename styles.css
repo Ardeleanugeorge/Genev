@@ -291,6 +291,17 @@ body {
     margin-top: 0;
     margin-left: 10px;
     min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.nav-dropdown .nav-item-dropdown.active .nav-dropdown,
+.nav-dropdown .nav-item-dropdown:hover .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
 }
 
 .nav-menu a:hover {

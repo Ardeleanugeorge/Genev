@@ -503,6 +503,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initProductsCarousel();
     initSearch();
     
+    // Handle nested dropdown (Bijuterii) - click to toggle
+    const bijuteriiDropdown = document.querySelector('.nav-dropdown .nav-item-dropdown a[href="#jewelry"]');
+    if (bijuteriiDropdown) {
+        bijuteriiDropdown.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+            parent.classList.toggle('active');
+        });
+    }
+    
     // Test scroll functionality
     console.log('Scroll functionality initialized');
 });
