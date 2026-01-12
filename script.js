@@ -190,17 +190,7 @@ function initCarousel() {
     // Start auto-play
     startCarousel();
     
-    // Pause on hover
-    const carouselContainer = document.querySelector('.carousel-container');
-    if (carouselContainer) {
-        carouselContainer.addEventListener('mouseenter', () => {
-            clearInterval(carouselInterval);
-        });
-        
-        carouselContainer.addEventListener('mouseleave', () => {
-            startCarousel();
-        });
-    }
+    // Removed pause on hover to prevent carousel from stopping when scrolling
 }
 
 // Products Carousel - 4 products per group on desktop, 2 on mobile
