@@ -120,7 +120,7 @@
     <section class="hero-carousel">
         <div class="carousel-container">
             <div class="carousel-slides">
-                <div class="carousel-slide active" style="background-image: url('coats and jackets 1.png');" data-mobile-image="coats and jackets 1.png">
+                <div class="carousel-slide active" style="background-image: url('coats and jackets 2.png');" data-mobile-image="coats and jackets 2.png">
                     <div class="hero-content">
                         <h1 class="hero-title">COATS AND JACKETS</h1>
                         <a href="#coats" class="btn-primary">SHOP NOW</a>
@@ -557,11 +557,11 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
     <!-- Mobile Menu Script - Inline for maximum reliability -->
     <script>
         // Simple mobile menu toggle - works immediately
-        function toggleMenu() {
+        // Make it global and available immediately
+        window.toggleMenu = function() {
             var menu = document.querySelector('.nav-menu-left');
             var overlay = document.querySelector('.nav-overlay');
             var btn = document.getElementById('hamburgerBtn');
@@ -581,6 +581,11 @@
                 btn.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
+        };
+        
+        // Also define it as a regular function for compatibility
+        function toggleMenu() {
+            window.toggleMenu();
         }
         
         // Close menu on overlay click
@@ -610,6 +615,7 @@
             });
         });
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
 

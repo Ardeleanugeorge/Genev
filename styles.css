@@ -1973,6 +1973,10 @@ body {
         display: none;
     }
     
+    .nav-menu-left.active {
+        display: flex !important;
+    }
+    
     .logo {
         grid-column: 2;
         position: relative;
@@ -2354,8 +2358,8 @@ body {
         background-image: url('sl5.jpg') !important;
     }
     
-    .carousel-slide[data-mobile-image="coats and jackets 1.png"] {
-        background-image: url('coats and jackets 1.png') !important;
+    .carousel-slide[data-mobile-image="coats and jackets 2.png"] {
+        background-image: url('coats and jackets 2.png') !important;
     }
     
     .carousel-container {
