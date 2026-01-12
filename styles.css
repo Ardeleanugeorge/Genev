@@ -263,6 +263,9 @@ body {
 
 .nav-dropdown-title:not(:first-child) {
     margin-top: 8px;
+}
+
+.nav-dropdown-title:not(:first-child) + li > a {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 9px;
 }
