@@ -267,7 +267,7 @@ body {
     letter-spacing: 1px;
     margin: 0;
     pointer-events: none;
-    text-align: center;
+    text-align: left;
 }
 
 .nav-dropdown-title:not(:first-child) {
@@ -2358,8 +2358,8 @@ body {
         background-image: url('sl5.jpg') !important;
     }
     
-    .carousel-slide[data-mobile-image="coats and jackets 2.png"] {
-        background-image: url('coats and jackets 2.png') !important;
+    .carousel-slide[data-mobile-image="slider 1.jpg"] {
+        background-image: url('slider 1.jpg') !important;
     }
     
     .carousel-container {
