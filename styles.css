@@ -2167,26 +2167,55 @@ body {
         filter: none;
     }
     
-    /* Mobile menu - Pop-up with white background and black text */
+    /* Mobile menu - Slide-in from right like bluzat.com */
     .nav-menu-left {
         position: fixed;
         top: 0;
-        left: -100%;
+        right: -100%;
         width: 85%;
-        max-width: 350px;
+        max-width: 400px;
         height: 100vh;
         background: #ffffff;
         z-index: 10003 !important;
-        transition: left 0.3s ease;
-        padding: 80px 30px 30px;
+        transition: right 0.3s ease-in-out;
+        padding: 0;
         margin-top: 0;
         flex-direction: column;
         overflow-y: auto;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        display: flex;
     }
     
     .nav-menu-left.active {
-        left: 0;
+        right: 0;
+    }
+    
+    /* Close button at top */
+    .mobile-menu-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        z-index: 10004;
+        color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        transition: opacity 0.2s ease;
+    }
+    
+    .mobile-menu-close:hover {
+        opacity: 0.7;
+    }
+    
+    .mobile-menu-close svg {
+        width: 24px;
+        height: 24px;
     }
     
     .nav-menu-left .nav-menu {
@@ -2194,30 +2223,36 @@ body {
         gap: 0;
         align-items: flex-start;
         list-style: none;
-        padding: 0;
+        padding: 80px 30px 30px;
         margin: 0;
+        width: 100%;
     }
     
     .nav-menu-left .nav-menu li {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         width: 100%;
+        margin-bottom: 4px;
     }
     
     .nav-menu-left .nav-menu .nav-link-main {
         color: #000000;
         text-shadow: none;
-        font-size: 16px;
-        font-weight: 500;
-        padding: 15px 0;
+        font-size: 17px;
+        font-weight: 600;
+        padding: 18px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        transition: color 0.3s;
+        transition: color 0.2s ease;
         text-decoration: none;
+        min-height: 48px;
+        touch-action: manipulation;
     }
     
-    .nav-menu-left .nav-menu .nav-link-main:hover {
+    .nav-menu-left .nav-menu .nav-link-main:hover,
+    .nav-menu-left .nav-menu .nav-link-main:active {
         color: #666666;
+        background-color: rgba(0, 0, 0, 0.02);
     }
     
     /* Arrow indicator for dropdown items */
@@ -2225,7 +2260,7 @@ body {
         content: '▼';
         font-size: 10px;
         margin-left: 10px;
-        transition: transform 0.3s;
+        transition: transform 0.2s ease-in-out;
     }
     
     .nav-menu-left .nav-item-dropdown.active > .nav-link-main::after {
@@ -2247,11 +2282,11 @@ body {
         transition: max-height 0.3s ease;
     }
     
-    /* Nested dropdowns in mobile menu */
+    /* Nested dropdowns in mobile menu - Accordion with 200ms animation */
     .nav-menu-left .nav-item-dropdown .nav-dropdown {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease;
+        transition: max-height 0.2s ease-in-out;
         padding-left: 20px;
     }
     
@@ -2260,16 +2295,22 @@ body {
     }
     
     .nav-dropdown a {
-        padding: 12px 20px;
+        padding: 16px 20px;
         color: #333333;
-        font-size: 14px;
+        font-size: 15px;
+        font-weight: 500;
         display: block;
         text-decoration: none;
-        transition: background 0.3s;
+        transition: background 0.2s ease, color 0.2s ease;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        touch-action: manipulation;
     }
     
-    .nav-dropdown a:hover {
+    .nav-dropdown a:hover,
+    .nav-dropdown a:active {
         background: rgba(0, 0, 0, 0.05);
         color: #000000;
     }
@@ -2297,10 +2338,13 @@ body {
         background: rgba(0, 0, 0, 0.5);
         z-index: 10002 !important;
         backdrop-filter: blur(2px);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
     }
     
     .nav-overlay.active {
         display: block;
+        opacity: 1;
     }
     
     .nav-menu {
