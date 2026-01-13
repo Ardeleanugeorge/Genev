@@ -2233,7 +2233,7 @@ body {
         text-shadow: none;
         font-size: 17px;
         font-weight: 600;
-        padding: 18px 30px;
+        padding: 18px 0 18px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2242,6 +2242,7 @@ body {
         min-height: 48px;
         touch-action: manipulation;
         width: 100%;
+        position: relative;
     }
     
     .nav-menu-left .nav-menu .nav-link-main:hover,
@@ -2254,13 +2255,18 @@ body {
     .nav-menu-left .nav-item-dropdown > .nav-link-main::after {
         content: '›';
         font-size: 20px;
-        margin-left: auto;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
         transition: transform 0.2s ease-in-out;
         font-weight: 300;
-        display: flex;
-        align-items: center;
-        align-self: center;
         line-height: 1;
+        display: inline-block;
+    }
+    
+    .nav-menu-left .nav-item-dropdown.active > .nav-link-main::after {
+        transform: translateY(-50%) rotate(90deg);
     }
     
     /* Hide nested dropdowns in main menu - we'll use submenu view instead */
