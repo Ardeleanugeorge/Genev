@@ -2389,6 +2389,12 @@ body {
     .mobile-submenu {
         padding: 80px 30px 30px;
         width: 100%;
+        animation: slideIn 0.25s ease;
+    }
+
+    @keyframes slideIn {
+        from { transform: translateX(20px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
     
     .mobile-submenu-back {
@@ -2458,30 +2464,10 @@ body {
         display: block !important;
     }
     
+    /* Dezactivează dropdown-urile pe mobil - folosim doar mobile-submenu */
     .nav-dropdown {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        padding: 0;
-        margin: 0;
-        background: transparent;
-        list-style: none;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
+        display: none !important;
     }
-    
-    /* Nested dropdowns in mobile menu - Accordion with 200ms animation */
-    .nav-menu-left .nav-item-dropdown .nav-dropdown {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-in-out;
-        padding-left: 20px;
-    }
-    
-    .nav-menu-left .nav-item-dropdown.active .nav-dropdown {
         max-height: 1000px;
     }
     

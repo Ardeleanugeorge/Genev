@@ -506,40 +506,48 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mobile menu two-level navigation
     function initMobileMenuNavigation() {
+        const menu = document.querySelector('.nav-menu-left');
+        const submenu = document.getElementById('mobileSubmenu');
+        if (!menu || !submenu) return;
+
+        const submenuTitle = submenu.querySelector('.mobile-submenu-title');
+        const submenuList = submenu.querySelector('.mobile-submenu-list');
+        const mainMenu = menu.querySelector('.nav-menu');
+
         document.addEventListener('click', function (e) {
             const toggle = e.target.closest('.submenu-toggle');
             if (!toggle) return;
+            if (window.innerWidth > 768) return;
 
             e.preventDefault();
             e.stopPropagation();
 
-            const menu = document.querySelector('.nav-menu-left');
-            const submenu = document.getElementById('mobileSubmenu');
-            const submenuTitle = submenu.querySelector('.mobile-submenu-title');
-            const submenuList = submenu.querySelector('.mobile-submenu-list');
-
-            const parentItem = toggle.closest('.nav-item-dropdown');
-            const dropdown = parentItem.querySelector(':scope > .nav-dropdown');
-
+            const item = toggle.closest('.nav-item-dropdown');
+            const dropdown = item.querySelector(':scope > .nav-dropdown');
             if (!dropdown) return;
 
             submenuTitle.textContent =
-                parentItem.querySelector('.nav-link-main').textContent.trim();
+                item.querySelector('.nav-link-main').textContent.trim();
 
             submenuList.innerHTML = '';
 
-            dropdown.querySelectorAll(':scope > li > a').forEach(link => {
+            dropdown.querySelectorAll(':scope > li > a').forEach(a => {
                 const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = link.href;
-                a.textContent = link.textContent.trim();
-                li.appendChild(a);
+                const link = document.createElement('a');
+                link.href = a.href;
+                link.textContent = a.textContent.trim();
+                li.appendChild(link);
                 submenuList.appendChild(li);
             });
 
-            menu.classList.add('submenu-active');
+            mainMenu.style.display = 'none';
             submenu.style.display = 'block';
         });
+
+        window.goBackToMainMenu = function () {
+            mainMenu.style.display = 'flex';
+            submenu.style.display = 'none';
+        };
     }
     
     function showNestedSubmenu(title, dropdown) {
@@ -566,15 +574,6 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.add('submenu-active');
         submenu.style.display = 'block';
     }
-    
-    // Global function to go back to main menu
-    window.goBackToMainMenu = function() {
-        const menu = document.querySelector('.nav-menu-left');
-        const submenu = document.getElementById('mobileSubmenu');
-
-        if (menu) menu.classList.remove('submenu-active');
-        if (submenu) submenu.style.display = 'none';
-    };
     
     // Initialize mobile menu navigation
     initMobileMenuNavigation();
