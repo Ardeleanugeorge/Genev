@@ -162,7 +162,7 @@ function initCarousel() {
         }
         carouselInterval = setInterval(() => {
             nextSlide();
-        }, 5000); // Change slide every 5 seconds
+        }, 4000); // Change slide every 4 seconds
     }
 
     function resetCarousel() {
