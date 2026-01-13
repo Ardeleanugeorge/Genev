@@ -378,6 +378,16 @@ body {
         display: none !important;
     }
     
+    /* Hide mobile menu close button on desktop */
+    .mobile-menu-close {
+        display: none !important;
+    }
+    
+    /* Hide mobile menu header on desktop */
+    .mobile-menu-header {
+        display: none !important;
+    }
+    
     /* On desktop, make mobile-menu-row behave like a transparent wrapper */
     .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row {
         display: inline-block !important;
