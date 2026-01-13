@@ -504,25 +504,91 @@ document.addEventListener('DOMContentLoaded', () => {
     initProductsCarousel();
     initSearch();
     
-    // Handle all nested dropdowns in mobile menu - click to toggle
-    const nestedDropdowns = document.querySelectorAll('.nav-menu-left .nav-item-dropdown > .nav-link-main');
-    nestedDropdowns.forEach(dropdownLink => {
-        dropdownLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parent = this.parentElement;
-            parent.classList.toggle('active');
+    // Mobile menu two-level navigation
+    function initMobileMenuNavigation() {
+        const menu = document.querySelector('.nav-menu-left');
+        const submenu = document.getElementById('mobileSubmenu');
+        const submenuTitle = submenu.querySelector('.mobile-submenu-title');
+        const submenuList = submenu.querySelector('.mobile-submenu-list');
+        
+        // Handle main menu items with subcategories
+        const mainMenuItems = document.querySelectorAll('.nav-menu-left .nav-item-dropdown > .nav-link-main');
+        mainMenuItems.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                const dropdown = parent.querySelector('.nav-dropdown');
+                
+                if (dropdown && dropdown.children.length > 0) {
+                    // Show submenu
+                    const categoryName = this.textContent.trim();
+                    submenuTitle.textContent = categoryName;
+                    
+                    // Populate submenu
+                    submenuList.innerHTML = '';
+                    Array.from(dropdown.children).forEach(item => {
+                        const subLink = item.querySelector('a');
+                        if (subLink) {
+                            const li = document.createElement('li');
+                            const a = document.createElement('a');
+                            a.href = subLink.getAttribute('href');
+                            a.textContent = subLink.textContent.trim();
+                            
+                            // Check if this subcategory has nested items
+                            const nestedDropdown = item.querySelector('.nav-dropdown');
+                            if (nestedDropdown && nestedDropdown.children.length > 0) {
+                                a.addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    showNestedSubmenu(this.textContent.trim(), nestedDropdown);
+                                });
+                            }
+                            
+                            li.appendChild(a);
+                            submenuList.appendChild(li);
+                        }
+                    });
+                    
+                    // Show submenu, hide main menu
+                    menu.classList.add('submenu-active');
+                }
+            });
         });
-    });
+    }
     
-    // Also handle nested dropdowns inside other dropdowns (like Bijuterii)
-    const allNestedDropdowns = document.querySelectorAll('.nav-dropdown .nav-item-dropdown > .nav-link-main');
-    allNestedDropdowns.forEach(dropdownLink => {
-        dropdownLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parent = this.parentElement;
-            parent.classList.toggle('active');
+    function showNestedSubmenu(title, dropdown) {
+        const menu = document.querySelector('.nav-menu-left');
+        const submenu = document.getElementById('mobileSubmenu');
+        const submenuTitle = submenu.querySelector('.mobile-submenu-title');
+        const submenuList = submenu.querySelector('.mobile-submenu-list');
+        
+        submenuTitle.textContent = title;
+        submenuList.innerHTML = '';
+        
+        Array.from(dropdown.children).forEach(item => {
+            const subLink = item.querySelector('a');
+            if (subLink) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = subLink.getAttribute('href');
+                a.textContent = subLink.textContent.trim();
+                li.appendChild(a);
+                submenuList.appendChild(li);
+            }
         });
-    });
+        
+        menu.classList.add('submenu-active');
+    }
+    
+    // Global function to go back to main menu
+    window.goBackToMainMenu = function() {
+        const menu = document.querySelector('.nav-menu-left');
+        if (menu) {
+            menu.classList.remove('submenu-active');
+        }
+    };
+    
+    // Initialize mobile menu navigation
+    initMobileMenuNavigation();
     
     // Test scroll functionality
     console.log('Scroll functionality initialized');

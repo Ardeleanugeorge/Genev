@@ -104,7 +104,21 @@
                                 <li><a href="#silk">Matase</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#account" class="nav-link-main">Account</a>
+                        </li>
                     </ul>
+                    
+                    <!-- Submenu view (hidden by default) -->
+                    <div class="mobile-submenu" id="mobileSubmenu" style="display: none;">
+                        <button class="mobile-submenu-back" onclick="goBackToMainMenu()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                            <span class="mobile-submenu-title"></span>
+                        </button>
+                        <ul class="mobile-submenu-list"></ul>
+                    </div>
                 </div>
                 <!-- Center: Logo -->
                 <div class="logo">
@@ -611,11 +625,13 @@
             
             if (isOpen) {
                 menu.classList.remove('active');
+                menu.classList.remove('submenu-active');
                 overlay.classList.remove('active');
                 btn.classList.remove('active');
                 document.body.style.overflow = '';
             } else {
                 menu.classList.add('active');
+                menu.classList.remove('submenu-active');
                 overlay.classList.add('active');
                 btn.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -635,18 +651,24 @@
             
             if (overlay) {
                 overlay.addEventListener('click', function() {
-                    if (menu) menu.classList.remove('active');
+                    if (menu) {
+                        menu.classList.remove('active');
+                        menu.classList.remove('submenu-active');
+                    }
                     overlay.classList.remove('active');
                     if (btn) btn.classList.remove('active');
                     document.body.style.overflow = '';
                 });
             }
             
-            // Close on link click
-            var links = document.querySelectorAll('.nav-menu-left .nav-menu a');
+            // Close on link click (only for non-dropdown links)
+            var links = document.querySelectorAll('.nav-menu-left .nav-menu > li:not(.nav-item-dropdown) > a, .mobile-submenu-list a');
             links.forEach(function(link) {
                 link.addEventListener('click', function() {
-                    if (menu) menu.classList.remove('active');
+                    if (menu) {
+                        menu.classList.remove('active');
+                        menu.classList.remove('submenu-active');
+                    }
                     if (overlay) overlay.classList.remove('active');
                     if (btn) btn.classList.remove('active');
                     document.body.style.overflow = '';
