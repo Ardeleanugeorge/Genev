@@ -124,9 +124,9 @@ function initCarousel() {
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
         
-        // Wait for fade out to complete, then show black screen for 25ms
+        // Wait for fade out to complete, then show black screen for 15ms
         setTimeout(() => {
-            // Black screen moment (all slides are completely hidden) - 25ms
+            // Black screen moment (all slides are completely hidden) - 15ms
             // Then fade in the new slide
             setTimeout(() => {
                 if (slides[index]) {
@@ -135,7 +135,7 @@ function initCarousel() {
                 if (dots[index]) {
                     dots[index].classList.add('active');
                 }
-            }, 25); // Black screen for 25ms - instant and complete
+            }, 15); // Black screen for 15ms - instant and complete
         }, 800); // Wait for fade out (0.8s transition)
     }
 
