@@ -136,7 +136,7 @@ function initCarousel() {
                     dots[index].classList.add('active');
                 }
             }, 40); // Black screen for 40ms - instant and complete
-        }, 200); // Wait for fade out (0.2s transition - rapid fade to black)
+        }, 400); // Wait for fade out (0.4s transition - rapid fade to black)
     }
 
     function nextSlide() {
