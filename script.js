@@ -135,7 +135,7 @@ function initCarousel() {
                 if (dots[index]) {
                     dots[index].classList.add('active');
                 }
-            }, 200); // Black screen for 200ms
+            }, 100); // Black screen for 100ms
         }, 750); // Wait for fade out (half of 1.5s transition)
     }
 
