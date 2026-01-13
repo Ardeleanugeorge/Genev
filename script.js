@@ -126,8 +126,8 @@ function initCarousel() {
         
         // Wait for fade out to complete, then show black screen for 15ms
         setTimeout(() => {
-            // Black screen moment (all slides are completely hidden) - 15ms
-            // Then fade in the new slide
+            // Black screen moment (all slides are completely hidden) - 15ms instant
+            // Then fade in the new slide rapidly
             setTimeout(() => {
                 if (slides[index]) {
                     slides[index].classList.add('active');
@@ -136,7 +136,7 @@ function initCarousel() {
                     dots[index].classList.add('active');
                 }
             }, 15); // Black screen for 15ms - instant and complete
-        }, 800); // Wait for fade out (0.8s transition)
+        }, 400); // Wait for fade out (0.4s transition - rapid fade to black)
     }
 
     function nextSlide() {
@@ -162,7 +162,7 @@ function initCarousel() {
         }
         carouselInterval = setInterval(() => {
             nextSlide();
-        }, 4000); // Change slide every 4 seconds
+        }, 5000); // Change slide every 5 seconds
     }
 
     function resetCarousel() {
