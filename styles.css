@@ -438,7 +438,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -458,6 +459,7 @@ body {
 
 .carousel-slide.active {
     opacity: 1;
+    visibility: visible;
     z-index: 2;
 }
 

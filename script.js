@@ -121,16 +121,22 @@ function initCarousel() {
 
     function showSlide(index) {
         // Remove active class from all slides and dots
-        slides.forEach(slide => slide.classList.remove('active'));
+        slides.forEach((slide, i) => {
+            if (i !== index) {
+                slide.classList.remove('active');
+            }
+        });
         dots.forEach(dot => dot.classList.remove('active'));
         
-        // Add active class to current slide and dot
-        if (slides[index]) {
-            slides[index].classList.add('active');
-        }
-        if (dots[index]) {
-            dots[index].classList.add('active');
-        }
+        // Add active class to current slide and dot with a small delay for smooth fade
+        setTimeout(() => {
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+            if (dots[index]) {
+                dots[index].classList.add('active');
+            }
+        }, 50);
     }
 
     function nextSlide() {
