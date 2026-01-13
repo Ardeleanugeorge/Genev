@@ -373,6 +373,11 @@ body {
         display: none !important;
     }
     
+    /* Hide mobile-only items on desktop */
+    .mobile-only {
+        display: none !important;
+    }
+    
     /* Restore normal desktop menu behavior - extract link from mobile-menu-row */
     .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row {
         display: block !important;
