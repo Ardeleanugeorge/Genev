@@ -136,7 +136,7 @@ function initCarousel() {
                     dots[index].classList.add('active');
                 }
             }, 40); // Black screen for 40ms - instant and complete
-        }, 400); // Wait for fade out (0.4s transition - rapid fade to black)
+        }, 600); // Wait for fade out (0.6s transition - rapid fade to black)
     }
 
     function nextSlide() {
@@ -162,7 +162,7 @@ function initCarousel() {
         }
         carouselInterval = setInterval(() => {
             nextSlide();
-        }, 5000); // Change slide every 5 seconds
+        }, 6000); // Change slide every 6 seconds
     }
 
     function resetCarousel() {
