@@ -363,6 +363,43 @@ body {
     .icon-link .icon-text {
         display: block;
     }
+    
+    /* Hide mobile menu elements on desktop */
+    .mobile-menu-row {
+        display: none !important;
+    }
+    
+    .submenu-toggle {
+        display: none !important;
+    }
+    
+    /* Restore normal desktop menu behavior - extract link from mobile-menu-row */
+    .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row {
+        display: block !important;
+    }
+    
+    /* Hide the button on desktop */
+    .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row > .submenu-toggle {
+        display: none !important;
+    }
+    
+    /* Show the link inside mobile-menu-row on desktop as normal link */
+    .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row > .nav-link-main {
+        display: block !important;
+        padding: 0;
+        width: auto;
+        flex: none;
+        position: static;
+    }
+    
+    /* Make mobile-menu-row behave like a normal link container on desktop */
+    .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row {
+        display: block !important;
+        padding: 0;
+        min-height: auto;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
 }
 
 .hamburger {
@@ -2252,6 +2289,10 @@ body {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+    
+    .nav-menu-left .nav-menu .nav-item-dropdown > .nav-link-main {
+        display: none; /* Hide direct links, use mobile-menu-row instead */
     }
     
     .nav-menu-left .nav-menu .nav-link-main:hover,
