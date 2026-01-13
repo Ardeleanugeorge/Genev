@@ -413,6 +413,15 @@ body {
         transition: all 0.25s ease !important;
     }
     
+    /* Restore dropdown behavior on desktop - override mobile rule */
+    .nav-dropdown {
+        display: block !important;
+        position: absolute !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-10px) !important;
+    }
+    
     /* Ensure dropdowns work on desktop */
     .nav-menu-left .nav-menu .nav-item-dropdown:hover > .nav-dropdown {
         opacity: 1 !important;
