@@ -1983,14 +1983,6 @@ body {
         padding: 0 20px;
     }
     
-    .nav-menu-left {
-        display: none;
-    }
-    
-    .nav-menu-left.active {
-        display: flex !important;
-    }
-    
     .logo {
         grid-column: 2;
         position: relative;
@@ -2183,11 +2175,13 @@ body {
         flex-direction: column;
         overflow-y: auto;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-        display: flex;
+        display: flex !important;
+        visibility: visible;
     }
     
     .nav-menu-left.active {
-        left: 0;
+        left: 0 !important;
+        display: flex !important;
     }
     
     /* Close button at top */
