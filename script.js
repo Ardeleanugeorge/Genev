@@ -508,86 +508,45 @@ document.addEventListener('DOMContentLoaded', () => {
     function initMobileMenuNavigation() {
         const menu = document.querySelector('.nav-menu-left');
         const submenu = document.getElementById('mobileSubmenu');
+        if (!menu || !submenu) return;
+
         const submenuTitle = submenu.querySelector('.mobile-submenu-title');
         const submenuList = submenu.querySelector('.mobile-submenu-list');
-        
-        // Check if mobile
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
-        
-        // Handle submenu toggle buttons - for all levels
-        // Use event delegation to handle all submenu toggles
-        document.addEventListener('click', function(e) {
-            // Check if mobile at click time
+
+        document.addEventListener('click', function (e) {
             if (window.innerWidth > 768) return;
-            
-            const toggleBtn = e.target.closest('.submenu-toggle');
-            if (!toggleBtn) return;
-            
+
+            const toggle = e.target.closest('.submenu-toggle');
+            if (!toggle) return;
+
             e.preventDefault();
             e.stopPropagation();
-            
-            const parent = toggleBtn.closest('.nav-item-dropdown');
-            if (!parent) return;
-            
-                const dropdown = parent.querySelector('.nav-dropdown');
-                if (!dropdown) return;
-                
-                // Show submenu
-            const categoryName = parent.querySelector('.nav-link-main').textContent.trim();
-            submenuTitle.textContent = categoryName;
-            
-            // Populate submenu
+
+            const parent = toggle.closest('.nav-item-dropdown');
+            const dropdown = parent.querySelector(':scope > .nav-dropdown');
+            if (!dropdown) return;
+
+            // titlu
+            submenuTitle.textContent =
+                parent.querySelector('.nav-link-main').textContent.trim();
+
+            // listă
             submenuList.innerHTML = '';
-            
-            // Get all direct children (li elements) from dropdown
-            Array.from(dropdown.children).forEach(item => {
-                if (item.tagName === 'LI') {
-                    const li = document.createElement('li');
-                    
-                    // Check if this item has a nested dropdown
-                    const nestedDropdown = item.querySelector('.nav-dropdown');
-                    const nestedLink = item.querySelector('.nav-link-main');
-                    
-                    if (nestedDropdown && nestedDropdown.children.length > 0) {
-                        // This item has subcategories - create a clickable item that opens nested submenu
-                        const link = document.createElement('a');
-                        link.href = nestedLink ? nestedLink.getAttribute('href') || '#' : '#';
-                        link.textContent = nestedLink ? nestedLink.textContent.trim() : item.textContent.trim();
-                        link.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            showNestedSubmenu(this.textContent.trim(), nestedDropdown);
-                        });
-                        li.appendChild(link);
-                    } else {
-                        // Regular link without subcategories
-                        const link = item.querySelector('a');
-                        if (link) {
-                            const newLink = document.createElement('a');
-                            newLink.href = link.getAttribute('href') || '#';
-                            newLink.textContent = link.textContent.trim();
-                            li.appendChild(newLink);
-                        }
-                    }
-                    
-                    submenuList.appendChild(li);
-                }
+
+            Array.from(dropdown.children).forEach(li => {
+                const link = li.querySelector('a');
+                if (!link) return;
+
+                const item = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.textContent = link.textContent.trim();
+                item.appendChild(a);
+                submenuList.appendChild(item);
             });
-            
-            // Show submenu, hide main menu
-            submenu.style.display = 'block';
+
             menu.classList.add('submenu-active');
         });
-            
-            // Prevent link clicks from opening submenu - only button does
-            document.querySelectorAll('.nav-menu-left .nav-item-dropdown > .mobile-menu-row > .nav-link-main').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Allow normal navigation for links without preventing default
-                    // The button handles submenu opening
-                });
-            });
-        }
     }
     
     function showNestedSubmenu(title, dropdown) {

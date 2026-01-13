@@ -2450,9 +2450,10 @@ body {
     
     /* Hide main menu when submenu is shown */
     .nav-menu-left.submenu-active .nav-menu {
-        display: none;
+        display: none !important;
     }
     
+    /* Show submenu when active */
     .nav-menu-left.submenu-active .mobile-submenu {
         display: block !important;
     }
