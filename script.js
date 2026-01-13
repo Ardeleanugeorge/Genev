@@ -546,6 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             menu.classList.add('submenu-active');
+            submenu.style.display = 'block';
         });
     }
     
@@ -571,18 +572,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         menu.classList.add('submenu-active');
+        submenu.style.display = 'block';
     }
     
     // Global function to go back to main menu
     window.goBackToMainMenu = function() {
         const menu = document.querySelector('.nav-menu-left');
         const submenu = document.getElementById('mobileSubmenu');
-        if (menu) {
-            menu.classList.remove('submenu-active');
-        }
-        if (submenu) {
-            submenu.style.display = 'none';
-        }
+
+        if (menu) menu.classList.remove('submenu-active');
+        if (submenu) submenu.style.display = 'none';
     };
     
     // Initialize mobile menu navigation

@@ -2448,12 +2448,12 @@ body {
         background-color: rgba(0, 0, 0, 0.02);
     }
     
-    /* Hide main menu when submenu is shown */
+    /* ascunde meniul principal când intrăm în submeniu */
     .nav-menu-left.submenu-active .nav-menu {
-        display: none !important;
+        display: none;
     }
-    
-    /* Show submenu when active */
+
+    /* afișează submeniul */
     .nav-menu-left.submenu-active .mobile-submenu {
         display: block !important;
     }
