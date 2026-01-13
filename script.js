@@ -506,43 +506,35 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mobile menu two-level navigation
     function initMobileMenuNavigation() {
-        const menu = document.querySelector('.nav-menu-left');
-        const submenu = document.getElementById('mobileSubmenu');
-        if (!menu || !submenu) return;
-
-        const submenuTitle = submenu.querySelector('.mobile-submenu-title');
-        const submenuList = submenu.querySelector('.mobile-submenu-list');
-
         document.addEventListener('click', function (e) {
-            if (window.innerWidth > 768) return;
-
             const toggle = e.target.closest('.submenu-toggle');
             if (!toggle) return;
 
             e.preventDefault();
             e.stopPropagation();
 
-            const parent = toggle.closest('.nav-item-dropdown');
-            const dropdown = parent.querySelector(':scope > .nav-dropdown');
+            const menu = document.querySelector('.nav-menu-left');
+            const submenu = document.getElementById('mobileSubmenu');
+            const submenuTitle = submenu.querySelector('.mobile-submenu-title');
+            const submenuList = submenu.querySelector('.mobile-submenu-list');
+
+            const parentItem = toggle.closest('.nav-item-dropdown');
+            const dropdown = parentItem.querySelector(':scope > .nav-dropdown');
+
             if (!dropdown) return;
 
-            // titlu
             submenuTitle.textContent =
-                parent.querySelector('.nav-link-main').textContent.trim();
+                parentItem.querySelector('.nav-link-main').textContent.trim();
 
-            // listă
             submenuList.innerHTML = '';
 
-            Array.from(dropdown.children).forEach(li => {
-                const link = li.querySelector('a');
-                if (!link) return;
-
-                const item = document.createElement('li');
+            dropdown.querySelectorAll(':scope > li > a').forEach(link => {
+                const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.href = link.href;
                 a.textContent = link.textContent.trim();
-                item.appendChild(a);
-                submenuList.appendChild(item);
+                li.appendChild(a);
+                submenuList.appendChild(li);
             });
 
             menu.classList.add('submenu-active');
