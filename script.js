@@ -135,8 +135,8 @@ function initCarousel() {
                 if (dots[index]) {
                     dots[index].classList.add('active');
                 }
-            }, 100); // Black screen for 100ms
-        }, 750); // Wait for fade out (half of 1.5s transition)
+            }, 50); // Black screen for 50ms
+        }, 600); // Wait for fade out (shorter wait for faster transition)
     }
 
     function nextSlide() {
@@ -504,15 +504,25 @@ document.addEventListener('DOMContentLoaded', () => {
     initProductsCarousel();
     initSearch();
     
-    // Handle nested dropdown (Bijuterii) - click to toggle
-    const bijuteriiDropdown = document.querySelector('.nav-dropdown .nav-item-dropdown a[href="#jewelry"]');
-    if (bijuteriiDropdown) {
-        bijuteriiDropdown.addEventListener('click', function(e) {
+    // Handle all nested dropdowns in mobile menu - click to toggle
+    const nestedDropdowns = document.querySelectorAll('.nav-menu-left .nav-item-dropdown > .nav-link-main');
+    nestedDropdowns.forEach(dropdownLink => {
+        dropdownLink.addEventListener('click', function(e) {
             e.preventDefault();
             const parent = this.parentElement;
             parent.classList.toggle('active');
         });
-    }
+    });
+    
+    // Also handle nested dropdowns inside other dropdowns (like Bijuterii)
+    const allNestedDropdowns = document.querySelectorAll('.nav-dropdown .nav-item-dropdown > .nav-link-main');
+    allNestedDropdowns.forEach(dropdownLink => {
+        dropdownLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+            parent.classList.toggle('active');
+        });
+    });
     
     // Test scroll functionality
     console.log('Scroll functionality initialized');
