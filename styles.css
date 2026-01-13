@@ -2239,7 +2239,7 @@ body {
         text-shadow: none;
         font-size: 17px;
         font-weight: 600;
-        padding: 18px 30px 18px 0;
+        padding: 18px 30px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2248,7 +2248,6 @@ body {
         min-height: 48px;
         touch-action: manipulation;
         width: 100%;
-        position: relative;
     }
     
     .nav-menu-left .nav-menu .nav-link-main:hover,
@@ -2257,14 +2256,16 @@ body {
         background-color: rgba(0, 0, 0, 0.02);
     }
     
-    /* Arrow indicator for dropdown items - right arrow at maximum distance */
+    /* Arrow indicator for dropdown items - right arrow on same line */
     .nav-menu-left .nav-item-dropdown > .nav-link-main::after {
         content: '›';
         font-size: 20px;
-        position: absolute;
-        right: 30px;
+        margin-left: auto;
         transition: transform 0.2s ease-in-out;
         font-weight: 300;
+        line-height: 1;
+        display: flex;
+        align-items: center;
     }
     
     /* Hide nested dropdowns in main menu - we'll use submenu view instead */
