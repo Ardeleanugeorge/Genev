@@ -2239,7 +2239,7 @@ body {
         text-shadow: none;
         font-size: 17px;
         font-weight: 600;
-        padding: 18px 0;
+        padding: 18px 30px 18px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2247,6 +2247,8 @@ body {
         text-decoration: none;
         min-height: 48px;
         touch-action: manipulation;
+        width: 100%;
+        position: relative;
     }
     
     .nav-menu-left .nav-menu .nav-link-main:hover,
@@ -2255,11 +2257,12 @@ body {
         background-color: rgba(0, 0, 0, 0.02);
     }
     
-    /* Arrow indicator for dropdown items - right arrow */
+    /* Arrow indicator for dropdown items - right arrow at maximum distance */
     .nav-menu-left .nav-item-dropdown > .nav-link-main::after {
         content: '›';
         font-size: 20px;
-        margin-left: auto;
+        position: absolute;
+        right: 30px;
         transition: transform 0.2s ease-in-out;
         font-weight: 300;
     }
