@@ -512,42 +512,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const submenuTitle = submenu.querySelector('.mobile-submenu-title');
         const submenuList = submenu.querySelector('.mobile-submenu-list');
-        const mainMenu = menu.querySelector('.nav-menu');
 
         document.addEventListener('click', function (e) {
+            if (window.innerWidth > 768) return;
+
             const toggle = e.target.closest('.submenu-toggle');
             if (!toggle) return;
-            if (window.innerWidth > 768) return;
 
             e.preventDefault();
             e.stopPropagation();
 
-            const item = toggle.closest('.nav-item-dropdown');
-            const dropdown = item.querySelector(':scope > .nav-dropdown');
+            const parent = toggle.closest('.nav-item-dropdown');
+            const dropdown = parent.querySelector(':scope > .nav-dropdown');
             if (!dropdown) return;
 
+            // titlu
             submenuTitle.textContent =
-                item.querySelector('.nav-link-main').textContent.trim();
+                parent.querySelector('.nav-link-main').textContent.trim();
 
+            // listă
             submenuList.innerHTML = '';
 
-            dropdown.querySelectorAll(':scope > li > a').forEach(a => {
-                const li = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = a.href;
-                link.textContent = a.textContent.trim();
-                li.appendChild(link);
-                submenuList.appendChild(li);
+            Array.from(dropdown.children).forEach(li => {
+                const link = li.querySelector('a');
+                if (!link) return;
+
+                const item = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.textContent = link.textContent.trim();
+                item.appendChild(a);
+                submenuList.appendChild(item);
             });
 
-            mainMenu.style.display = 'none';
+            menu.classList.add('submenu-active');
             submenu.style.display = 'block';
         });
-
-        window.goBackToMainMenu = function () {
-            mainMenu.style.display = 'flex';
-            submenu.style.display = 'none';
-        };
     }
     
     function showNestedSubmenu(title, dropdown) {
@@ -574,6 +574,15 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.add('submenu-active');
         submenu.style.display = 'block';
     }
+    
+    // Global function to go back to main menu
+    window.goBackToMainMenu = function() {
+        const menu = document.querySelector('.nav-menu-left');
+        const submenu = document.getElementById('mobileSubmenu');
+
+        if (menu) menu.classList.remove('submenu-active');
+        if (submenu) submenu.style.display = 'none';
+    };
     
     // Initialize mobile menu navigation
     initMobileMenuNavigation();
