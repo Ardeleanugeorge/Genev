@@ -378,32 +378,76 @@ body {
         display: none !important;
     }
     
-    /* Restore normal desktop menu behavior - extract link from mobile-menu-row */
+    /* On desktop, make mobile-menu-row behave like a transparent wrapper */
     .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row {
-        display: block !important;
+        display: inline-block !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        width: auto !important;
+        background: transparent !important;
+        border: none !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
     }
     
-    /* Hide the button on desktop */
+    /* Hide button on desktop */
     .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row > .submenu-toggle {
         display: none !important;
     }
     
-    /* Show the link inside mobile-menu-row on desktop as normal link */
+    /* Make link inside mobile-menu-row look exactly like original nav-link-main on desktop */
     .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row > .nav-link-main {
-        display: block !important;
-        padding: 0;
-        width: auto;
-        flex: none;
-        position: static;
+        display: inline-block !important;
+        padding: 5px 0 !important;
+        width: auto !important;
+        flex: none !important;
+        position: relative !important;
+        white-space: nowrap !important;
+        font-size: 11px !important;
+        letter-spacing: 0.8px !important;
+        text-transform: uppercase !important;
+        font-weight: 700 !important;
+        color: var(--text-dark) !important;
+        text-decoration: none !important;
+        transition: all 0.25s ease !important;
     }
     
-    /* Make mobile-menu-row behave like a normal link container on desktop */
-    .nav-menu-left .nav-menu .nav-item-dropdown > .mobile-menu-row {
+    /* Ensure dropdowns work on desktop */
+    .nav-menu-left .nav-menu .nav-item-dropdown:hover > .nav-dropdown {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Fix nested dropdowns in submenus on desktop */
+    .nav-menu-left .nav-menu .nav-dropdown .nav-item-dropdown > .mobile-menu-row {
         display: block !important;
-        padding: 0;
-        min-height: auto;
-        flex-direction: row;
-        justify-content: flex-start;
+        padding: 0 !important;
+        min-height: 0 !important;
+        width: 100% !important;
+    }
+    
+    .nav-menu-left .nav-menu .nav-dropdown .nav-item-dropdown > .mobile-menu-row > .nav-link-main {
+        display: block !important;
+        padding: 10px 20px !important;
+        font-size: 12px !important;
+        text-transform: none !important;
+        letter-spacing: 0.3px !important;
+        font-weight: 300 !important;
+        color: var(--text-dark) !important;
+        width: 100% !important;
+        text-decoration: none !important;
+    }
+    
+    .nav-menu-left .nav-menu .nav-dropdown .nav-item-dropdown > .mobile-menu-row > .submenu-toggle {
+        display: none !important;
+    }
+    
+    .nav-menu-left .nav-menu .nav-dropdown .nav-item-dropdown:hover > .nav-dropdown {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(0) !important;
     }
 }
 
@@ -3018,6 +3062,25 @@ body {
     .footer-bottom {
         flex-direction: column;
         text-align: center;
+        gap: 15px;
+    }
+    
+    /* Featured Product Mobile */
+    .featured-product {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .product-details h1 {
+        font-size: 24px;
+    }
+    
+    .price-large {
+        font-size: 22px;
+    }
+}
+
+
         gap: 15px;
     }
     
